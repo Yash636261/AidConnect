@@ -11,6 +11,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { Nav } from "@/components/shared/nav";
+import { Metrics } from "@/components/shared/metrics";
+import { RevenueChart } from "@/components/shared/revenue-chart";
+import { ActiveCasesMap } from "@/components/shared/active-cases-map";
+import { Schedule } from "@/components/shared/schedule";
+import { ModeToggle } from "@/components/shared/modetoggle";
 
 export default function page() {
   const links = [
@@ -61,23 +67,7 @@ export default function page() {
               ))}
             </div>
           </div>
-          {/* <div>
-            <SidebarLink
-              link={{
-                label: "Manu Arora",
-                href: "#",
-                icon: (
-                  <Image
-                    src="https://assets.aceternity.com/manu.png"
-                    className="h-7 w-7 flex-shrink-0 rounded-full"
-                    width={50}
-                    height={50}
-                    alt="Avatar"
-                  />
-                ),
-              }}
-            />
-          </div> */}
+          <ModeToggle />
         </SidebarBody>
       </Sidebar>
       <Dashboard />
@@ -112,27 +102,19 @@ export const LogoIcon = () => {
   );
 };
 
-// Dummy dashboard component with content
 const Dashboard = () => {
   return (
     <div className="flex flex-1">
-      <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">
-        <div className="flex gap-2">
-          {[...new Array(4)].map((i) => (
-            <div
-              key={"first-array" + i}
-              className="h-20 w-full rounded-lg  bg-gray-100 dark:bg-neutral-800 animate-pulse"
-            ></div>
-          ))}
-        </div>
-        <div className="flex gap-2 flex-1">
-          {[...new Array(2)].map((i) => (
-            <div
-              key={"second-array" + i}
-              className="h-full w-full rounded-lg  bg-gray-100 dark:bg-neutral-800 animate-pulse"
-            ></div>
-          ))}
-        </div>
+      <div className=" bg-background w-full">
+        <Nav />
+        <main className="p-8 space-y-8 max-h-screen overflow-y-scroll">
+          <Metrics />
+          <div className="grid gap-8 md:grid-cols-2">
+            <RevenueChart />
+            <ActiveCasesMap />
+          </div>
+          <Schedule />
+        </main>
       </div>
     </div>
   );
