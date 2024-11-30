@@ -90,7 +90,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <Story />
+      {/* <Story /> */}
       <FAQ />
       <Footer />
     </div>
