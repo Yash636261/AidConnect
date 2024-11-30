@@ -81,8 +81,8 @@ export default function RevenueChart() {
         <CardTitle>Overview</CardTitle>
         <p className="text-sm text-muted-foreground">Avg per month</p>
         <div className="flex items-baseline space-x-2">
-          <h3 className="text-2xl font-bold">$138,500</h3>
-          <span className="text-sm text-green-600">13.4% ↑</span>
+          <h3 className="text-2xl font-bold">138,500</h3>
+          {/* <span className="text-sm text-green-600">13.4% ↑</span> */}
         </div>
       </CardHeader>
       <CardContent>
