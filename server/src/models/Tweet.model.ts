@@ -1,24 +1,24 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 // Define the interface for the tweet document
 interface ITweet extends Document {
-  tweetId: string; // Unique tweet ID from Twitter API
+  tweetId: number; // Numeric ID for the tweet
   text: string; // The text content of the tweet
   location: string; // Location mentioned in the tweet (if available)
   urgencyLevel: string; // Urgency level (Critical, High, Medium, Low)
-  needs: string[]; // Array of needs mentioned (e.g., ["Food", "Medical Aid"])
-  sentiment: string; // Sentiment of the tweet (e.g., "Desperate", "Urgent")
+  needs: string[]; // Array of needs mentioned (e.g., ["Rescue", "Evacuation"])
+  sentiment: string; // Sentiment of the tweet (e.g., "Urgent", "Desperate")
   hashtags: string[]; // Hashtags in the tweet
   dateTime: Date; // Timestamp of the tweet
-  geolocation: string; // Geolocation from the tweet, if available
+  geolocation: string; // Geolocation details (city and specific location)
   authorNameHandle: string; // Author's Twitter handle
-  source: string; // Source of data (e.g., "Twitter")
+  source: string; // Source of the data (e.g., "Twitter")
 }
 
 // Define the tweet schema
 const TweetSchema: Schema = new Schema({
   tweetId: {
-    type: String,
+    type: Number, // Adjusted to match numeric format
     required: true,
     unique: true,
   },
@@ -28,31 +28,35 @@ const TweetSchema: Schema = new Schema({
   },
   location: {
     type: String,
-    required: false, // Not always available in Twitter data
+    required: false, // Not always available in tweets
   },
   urgencyLevel: {
     type: String,
-    required: false, // Can be inferred from text or set manually
+    required: false, // Can be inferred or set manually
   },
-  needs: [{
-    type: String,
-    required: false, // Can be extracted via NLP
-  }],
+  needs: [
+    {
+      type: String,
+      required: false, // Represented as an array of strings
+    },
+  ],
   sentiment: {
     type: String,
-    required: false, // Can be inferred from sentiment analysis
+    required: false, // Can be derived from sentiment analysis
   },
-  hashtags: [{
-    type: String,
-    required: false,
-  }],
+  hashtags: [
+    {
+      type: String,
+      required: false,
+    },
+  ],
   dateTime: {
     type: Date,
     required: true,
   },
   geolocation: {
     type: String,
-    required: false, // Can be available if tweet is geotagged
+    required: false, // Includes city and specific location details
   },
   authorNameHandle: {
     type: String,
@@ -61,10 +65,10 @@ const TweetSchema: Schema = new Schema({
   source: {
     type: String,
     required: true,
-    default: 'Twitter',
+    default: "Twitter",
   },
 });
 
 // Create and export the model
-const Tweet = mongoose.model<ITweet>('Tweet', TweetSchema);
+const Tweet = mongoose.model<ITweet>("Tweet", TweetSchema);
 export default Tweet;

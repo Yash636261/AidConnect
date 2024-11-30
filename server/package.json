@@ -4,14 +4,14 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc  && node ./dist/index.js",
-    "dev": "tsc-watch --onSuccess \"node dist/index\" "
+    "dev": "tsc-watch --onSuccess \"node dist/index\" ",
+    "build": "tsc -p ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/node": "^22.5.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mongoose": "^8.8.3",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
     "tsc-watch": "^6.2.0"
   }
 }

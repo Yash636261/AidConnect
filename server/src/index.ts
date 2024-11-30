@@ -1,16 +1,24 @@
-import express from 'express';
-import { tweets } from './tweets';
-import { instagram } from './instagram';
-import { posts} from './posts';
-import { connectDB } from './db/connectDB';
+import express from "express";
+import tweets from "./routes/tweet.route";
+import instagram from "./routes/instagramStory.route";
+import posts from "./routes/facebookPost.route";
+import allSource from "./routes/source.route";
+import { connectDB } from "./db/connectDB";
 const app = express();
-const port = 3000;
+const port = 8000;
+app.use(express.json());
 
-app.get('/', (req: express.Request, res: express.Response) => {
-    res.send({tweets,instagram,posts});
+app.get("/test", (req: express.Request, res: express.Response) => {
+  res.send("Hello! the server is up and running");
 });
 
-app.listen(port, async() => {
-    await connectDB();
-    console.log(`Server is running at http://localhost:${port}`);
+app.get("/", allSource);
+
+app.use("/tweets", tweets);
+app.use("/instagram", instagram);
+app.use("/posts", posts);
+
+app.listen(port, async () => {
+  await connectDB();
+  console.log(`Server is running at http://localhost:${port}`);
 });
