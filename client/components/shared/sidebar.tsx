@@ -1,15 +1,27 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
+import * as LucideIcons from "lucide-react";
 
 interface Links {
   label: string;
   href: string;
-  icon: React.JSX.Element | React.ReactNode;
+  icon: keyof typeof LucideIcons;
 }
+
+const iconComponents: {
+  [key: string]: React.ComponentType<{ className?: string }>;
+} = {
+  LayoutDashboard: LucideIcons.LayoutDashboard,
+  User: LucideIcons.User,
+  Settings: LucideIcons.Settings,
+  ArrowLeft: LucideIcons.ArrowLeft,
+  // Add more icons as needed
+};
 
 interface SidebarContextProps {
   open: boolean;
@@ -165,16 +177,18 @@ export const SidebarLink = ({
   props?: LinkProps;
 }) => {
   const { open, animate } = useSidebar();
+  const IconComponent = iconComponents[link.icon] || LucideIcons.HelpCircle; // Fallback to HelpCircle if icon not found
+
   return (
     <Link
       href={link.href}
       className={cn(
-        "flex items-center justify-start gap-2  group/sidebar py-2",
+        "flex items-center justify-start gap-2 group/sidebar py-2",
         className
       )}
       {...props}
     >
-      {link.icon}
+      <IconComponent className="w-5 h-5 text-neutral-700 dark:text-neutral-200" />
 
       <motion.span
         animate={{

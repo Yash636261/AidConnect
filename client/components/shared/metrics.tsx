@@ -36,7 +36,7 @@ function MetricCard({ title, value, change, trend }: MetricCardProps) {
   );
 }
 
-export function Metrics() {
+export default function Metrics() {
   return (
     <div className="grid gap-4 md:grid-cols-4">
       <MetricCard title="Patients" value="6025" change="66.95%" trend="up" />

@@ -27,7 +27,7 @@ const activeCases = [
   { id: 5, lat: 33.749, lng: -84.388, city: "Atlanta", cases: 600 },
 ];
 
-export function ActiveCasesMap() {
+export default function ActiveCasesMap() {
   useEffect(() => {
     // This is needed to properly load the map tiles
     const L = require("leaflet");

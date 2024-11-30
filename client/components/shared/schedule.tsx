@@ -29,7 +29,7 @@ const appointments: Appointment[] = [
   },
 ];
 
-export function Schedule() {
+export default function Schedule() {
   return (
     <Card>
       <CardHeader>

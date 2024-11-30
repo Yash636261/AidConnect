@@ -21,7 +21,7 @@ ChartJS.register(
   Legend
 );
 
-export function RevenueChart() {
+export default function RevenueChart() {
   const data = {
     labels: [
       "Jan",
