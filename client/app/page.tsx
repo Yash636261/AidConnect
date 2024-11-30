@@ -79,9 +79,8 @@ const page = () => {
                     src="/landing.jpg"
                     alt={`Product ${index + 1}`}
                     fill
-                    className={`object-cover transition-opacity duration-1000 ${
-                      index === currentImage ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`object-cover transition-opacity duration-1000 ${index === currentImage ? "opacity-100" : "opacity-0"
+                      }`}
                     priority={index === 0}
                   />
                 ))}
@@ -90,7 +89,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <Story />
+      {/* <Story /> */}
       <FAQ />
       <Footer />
     </div>
