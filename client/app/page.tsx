@@ -61,7 +61,7 @@ const page = () => {
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
                   <Link
-                    href={"/"}
+                    href={"/home"}
                     className="group flex h-10 items-center justify-center rounded-md border border-orange-600 bg-gradient-to-b from-orange-400 via-orange-500 to-orange-600 px-4 text-neutral-50 shadow-[inset_0_1px_0px_0px_#fdba74] active:[box-shadow:none]"
                   >
                     <span className="block group-active:[transform:translate3d(0,1px,0)]">
@@ -144,7 +144,7 @@ const Header = () => {
 
         <div className="hidden lg:block">
           <Button asChild>
-            <Link href="/api/auth/login">Log in</Link>
+            <Link href="/home">Log in</Link>
           </Button>
         </div>
         <div className="lg:hidden">
