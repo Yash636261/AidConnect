@@ -1,10 +1,16 @@
-import express from "express";
-import { getAllSources } from "../controllers/source.controller";
+import express from 'express';
+import { getTweets, getPosts, getStories,getAllSources } from '../controllers/source.controller';
 
 const router = express.Router();
+// Route to fetch all sources
+router.get('/', getAllSources);
+// Route to fetch tweets
+router.get('/tweets', getTweets);
 
-// Routes for fetching data from each source
+// Route to fetch posts
+router.get('/posts', getPosts);
 
-router.get("/", getAllSources);
+// Route to fetch stories
+router.get('/stories', getStories);
 
 export default router;
