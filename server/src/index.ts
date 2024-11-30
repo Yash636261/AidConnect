@@ -2,6 +2,7 @@ import express from "express";
 import actions from "./routes/action.route";
 import source from "./routes/source.route";
 import { connectDB } from "./db/connectDB";
+import scraping from "./routes/scraping.route";
 
 const app = express();
 const port = 8000;
@@ -14,6 +15,7 @@ app.get("/test", (req: express.Request, res: express.Response) => {
 
 app.use("/api/source", source);
 app.use("/api/actions", actions);
+app.use("/api/scraping", scraping);
 
 
 app.listen(port, async () => {

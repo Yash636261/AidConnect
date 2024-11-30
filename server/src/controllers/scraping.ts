@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ApifyClient } from 'apify-client';
 
+
 interface InstagramSearchBody {
     hashtags: string[];
     limit?: number;
@@ -22,6 +23,12 @@ interface TwitterSearchBody {
     lang?: string;
     since?: string;
     until?: string;
+}
+
+interface FacebookSearchBody {
+    query: string
+    search_type: string,
+    max_posts: number
 }
 
 interface TwitterPost {
@@ -196,4 +203,68 @@ export const getTwitterPosts = async (
 };
 
 
+export const getFacebookPosts = async (
+    req: Request<{}, {}, FacebookSearchBody>,
+    res: Response
+): Promise<void> => {
+    try {
+        // Get parameters from request body with defaults
+        const {
+            query,
+            search_type,
+            max_posts = 10
+        } = req.body;
 
+        // Validate required input
+        if (!query) {
+            res.status(400).json({
+                success: false,
+                error: 'Please provide twitterContent',
+            });
+            return;
+        }
+
+        // Prepare input with the correct structure
+        const input = {
+            query,
+            search_type,
+            max_posts
+        };
+
+        console.log('Starting facebook scraping with input:', input);
+
+        const run = await apifyClient.actor("l6CUZt8H0214D3I0N").call(input);
+
+        if (!run.defaultDatasetId) {
+            throw new Error('No dataset ID returned from actor run');
+        }
+
+        const { items } = await apifyClient.dataset(run.defaultDatasetId).listItems();
+        console.log(`Retrieved ${items.length} facebook posts from dataset`);
+
+        res.status(200).json({
+            success: true,
+            data: items,
+            count: items.length,
+            metadata: {
+                ...input,
+                runId: run.id,
+                datasetId: run.defaultDatasetId
+            }
+        });
+
+    } catch (error: any) {
+        console.error('facebook scraping error:', {
+            message: error.message,
+            stack: error.stack,
+            details: error.details || {},
+        });
+
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch facebook data',
+            details: error.message,
+            errorType: error.name,
+        });
+    }
+};
