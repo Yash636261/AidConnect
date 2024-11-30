@@ -4,6 +4,7 @@ import instagram from "./routes/instagramStory.route";
 import posts from "./routes/facebookPost.route";
 import allSource from "./routes/source.route";
 import { connectDB } from "./db/connectDB";
+import socialDataRoutes from './routes/scraping.route';
 const app = express();
 const port = 8000;
 app.use(express.json());
@@ -18,7 +19,11 @@ app.use("/tweets", tweets);
 app.use("/instagram", instagram);
 app.use("/facebook", posts);
 
+// Routes
+app.use('/api', socialDataRoutes);
+
 app.listen(port, async () => {
   await connectDB();
   console.log(`Server is running at http://localhost:${port}`);
 });
+
