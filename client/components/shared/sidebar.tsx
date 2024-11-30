@@ -10,7 +10,7 @@ import * as LucideIcons from "lucide-react";
 interface Links {
   label: string;
   href: string;
-  icon: keyof typeof LucideIcons;
+  icon?: keyof typeof LucideIcons;
 }
 
 const iconComponents: {
@@ -177,7 +177,8 @@ export const SidebarLink = ({
   props?: LinkProps;
 }) => {
   const { open, animate } = useSidebar();
-  const IconComponent = iconComponents[link.icon] || LucideIcons.HelpCircle; // Fallback to HelpCircle if icon not found
+
+  const IconComponent = link.icon && iconComponents[link.icon]; // Fallback to HelpCircle if icon not found
 
   return (
     <Link
@@ -188,7 +189,9 @@ export const SidebarLink = ({
       )}
       {...props}
     >
-      <IconComponent className="w-5 h-5 text-neutral-700 dark:text-neutral-200" />
+      {IconComponent && (
+        <IconComponent className="w-5 h-5 text-neutral-700 dark:text-neutral-200" />
+      )}
 
       <motion.span
         animate={{
