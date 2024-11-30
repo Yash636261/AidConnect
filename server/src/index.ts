@@ -6,7 +6,7 @@ import allSource from "./routes/source.route";
 import { connectDB } from "./db/connectDB";
 import socialDataRoutes from './routes/scraping.route';
 const app = express();
-const port = 8000;
+const port = 3000;
 app.use(express.json());
 
 app.get("/test", (req: express.Request, res: express.Response) => {
