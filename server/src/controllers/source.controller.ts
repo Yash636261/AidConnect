@@ -24,3 +24,32 @@ export const getAllSources = async (
     });
   }
 };
+
+export const getTweets = async (req: Request, res: Response): Promise<void> => {
+  try {
+      const tweets = await Tweet.find({});
+      res.status(200).json({ success: true, data: tweets });
+  } catch (error: any) {
+      res.status(500).json({ success: false, message: 'Failed to fetch tweets', error: error.message });
+  }
+};
+
+// Controller to fetch posts
+export const getPosts = async (req: Request, res: Response): Promise<void> => {
+  try {
+      const posts = await FacebookPost.find({});
+      res.status(200).json({ success: true, data: posts });
+  } catch (error: any) {
+      res.status(500).json({ success: false, message: 'Failed to fetch posts', error: error.message });
+  }
+};
+
+// Controller to fetch stories
+export const getStories = async (req: Request, res: Response): Promise<void> => {
+  try {
+      const stories = await InstagramStory.find({});
+      res.status(200).json({ success: true, data: stories });
+  } catch (error: any) {
+      res.status(500).json({ success: false, message: 'Failed to fetch stories', error: error.message });
+  }
+};
