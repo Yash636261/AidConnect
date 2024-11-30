@@ -46,7 +46,7 @@ export default function ClientSidebar({ links }: { links: Links[] }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <Sidebar open={open} setOpen={setOpen}>
+    <Sidebar open={true} setOpen={setOpen}>
       <SidebarBody className="justify-between gap-10">
         <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
           <Logo name="SwiftAid" open={open} />

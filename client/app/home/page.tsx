@@ -31,11 +31,24 @@ interface Links {
   icon: keyof typeof LucideIcons;
 }
 
+interface NavLinks {
+  label: string;
+  href: string;
+}
+
 const links: Links[] = [
-  { label: "Dashboard", href: "#", icon: "LayoutDashboard" },
+  { label: "Dashboard", href: "/home", icon: "LayoutDashboard" },
   { label: "Profile", href: "#", icon: "User" },
   { label: "Settings", href: "#", icon: "Settings" },
+  { label: "API", href: "/api", icon: "AppWindowIcon" },
   { label: "Logout", href: "#", icon: "ArrowLeft" },
+];
+const navlinks: NavLinks[] = [
+  // { label: "Dashboard", href: "#" },
+  // { label: "Profile", href: "#" },
+  // { label: "Settings", href: "#" },
+  // { label: "Logout", href: "#" },
+  // { label: "API", href: "/api" },
 ];
 
 export default function Page() {
@@ -58,7 +71,7 @@ const Dashboard = () => {
   return (
     <div className="flex flex-1">
       <div className="bg-background w-full">
-        <Nav />
+        <Nav links={navlinks} />
         <main className="p-8 space-y-8 max-h-screen overflow-y-scroll">
           <Metrics />
           <div className="grid gap-8 md:grid-cols-2">

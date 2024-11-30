@@ -7,6 +7,11 @@ interface NavItemProps {
   children: React.ReactNode;
 }
 
+interface NavLinks {
+  label: string;
+  href: string;
+}
+
 function NavItem({ href, isActive, children }: NavItemProps) {
   return (
     <Link
@@ -21,13 +26,14 @@ function NavItem({ href, isActive, children }: NavItemProps) {
   );
 }
 
-export function Nav() {
+export function Nav({ links = [] }: { links: NavLinks[] }) {
   return (
     <nav className="flex items-center space-x-4  bg-gray-100 dark:bg-neutral-800">
-      <NavItem href="#" isActive>
-        Overview
-      </NavItem>
-      <NavItem href="#">Map</NavItem>
+      {links.map((link, idx) => (
+        <NavItem key={idx} href={link.href} isActive={false}>
+          {link.label}
+        </NavItem>
+      ))}
     </nav>
   );
 }
