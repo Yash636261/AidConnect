@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 // Define the interface for the Instagram story document
 interface IInstagramStory extends Document {
@@ -6,15 +6,15 @@ interface IInstagramStory extends Document {
   userId: string; // User's unique ID on Instagram
   username: string; // Instagram username
   timestamp: Date; // Timestamp of when the story was posted
-  location?: string; // Location name mentioned in the story (optional)
+  location: string; // Location name mentioned in the story
   mediaType: string; // Type of media (e.g., "image", "video")
   mediaUrl: string; // URL of the media
-  text?: string; // Text content in the story (optional)
-  hashtags?: string[]; // Hashtags included in the story
-  sentiment?: string; // Sentiment analysis result
+  text: string; // Text content in the story
+  hashtags: string[]; // Hashtags included in the story
+  sentiment: string; // Sentiment analysis result
   urgency: boolean; // Indicates whether the post is urgent
-  placeName?: string; // Name of the place mentioned
-  coordinates?: {
+  placeName: string; // Name of the place mentioned
+  coordinates: {
     latitude: number;
     longitude: number;
   }; // Geolocation coordinates
@@ -41,7 +41,7 @@ const InstagramStorySchema: Schema = new Schema({
   },
   location: {
     type: String,
-    required: false,
+    required: true,
   },
   mediaType: {
     type: String,
@@ -53,15 +53,17 @@ const InstagramStorySchema: Schema = new Schema({
   },
   text: {
     type: String,
-    required: false,
+    required: true,
   },
-  hashtags: [{
-    type: String,
-    required: false,
-  }],
+  hashtags: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   sentiment: {
     type: String,
-    required: false,
+    required: true,
   },
   urgency: {
     type: Boolean,
@@ -70,20 +72,23 @@ const InstagramStorySchema: Schema = new Schema({
   },
   placeName: {
     type: String,
-    required: false,
+    required: true,
   },
   coordinates: {
     latitude: {
       type: Number,
-      required: false,
+      required: true,
     },
     longitude: {
       type: Number,
-      required: false,
+      required: true,
     },
   },
 });
 
 // Create and export the model
-const InstagramStory = mongoose.model<IInstagramStory>('InstagramStory', InstagramStorySchema);
+const InstagramStory = mongoose.model<IInstagramStory>(
+  "InstagramStory",
+  InstagramStorySchema
+);
 export default InstagramStory;

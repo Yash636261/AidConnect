@@ -16,7 +16,7 @@ app.get("/", allSource);
 
 app.use("/tweets", tweets);
 app.use("/instagram", instagram);
-app.use("/posts", posts);
+app.use("/facebook", posts);
 
 app.listen(port, async () => {
   await connectDB();

@@ -6,8 +6,7 @@ export const createBulkInstagramStories = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  
-  const { data } = req?.body;
+  const data = req?.body;
 
   if (!data || !Array.isArray(data)) {
     return res

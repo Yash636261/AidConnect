@@ -12,7 +12,10 @@
     "sentiment": "distress",
     "urgency": true,
     "placeName": "Adyar",
-    "coordinates": { "latitude": 13.0032, "longitude": 80.2455 }
+    "coordinates": {
+      "latitude": 13.0032,
+      "longitude": 80.2455
+    }
   },
   {
     "storyId": "2",
@@ -27,7 +30,10 @@
     "sentiment": "urgent",
     "urgency": true,
     "placeName": "Anna Nagar",
-    "coordinates": { "latitude": 13.0802, "longitude": 80.2312 }
+    "coordinates": {
+      "latitude": 13.0802,
+      "longitude": 80.2312
+    }
   },
   {
     "storyId": "3",
@@ -42,7 +48,10 @@
     "sentiment": "hopeful",
     "urgency": false,
     "placeName": "T Nagar",
-    "coordinates": { "latitude": 13.0535, "longitude": 80.227 }
+    "coordinates": {
+      "latitude": 13.0535,
+      "longitude": 80.227
+    }
   },
   {
     "storyId": "4",
@@ -57,7 +66,10 @@
     "sentiment": "desperate",
     "urgency": true,
     "placeName": "Saidapet",
-    "coordinates": { "latitude": 13.0021, "longitude": 80.2131 }
+    "coordinates": {
+      "latitude": 13.0021,
+      "longitude": 80.2131
+    }
   },
   {
     "storyId": "5",
@@ -72,7 +84,10 @@
     "sentiment": "hopeful",
     "urgency": false,
     "placeName": "Velachery",
-    "coordinates": { "latitude": 12.9876, "longitude": 80.22 }
+    "coordinates": {
+      "latitude": 12.9876,
+      "longitude": 80.22
+    }
   },
   {
     "storyId": "6",
@@ -87,7 +102,10 @@
     "sentiment": "urgent",
     "urgency": true,
     "placeName": "Pallavaram",
-    "coordinates": { "latitude": 12.9768, "longitude": 80.1716 }
+    "coordinates": {
+      "latitude": 12.9768,
+      "longitude": 80.1716
+    }
   },
   {
     "storyId": "7",
@@ -102,7 +120,10 @@
     "sentiment": "distress",
     "urgency": true,
     "placeName": "West Mambalam",
-    "coordinates": { "latitude": 13.0439, "longitude": 80.2135 }
+    "coordinates": {
+      "latitude": 13.0439,
+      "longitude": 80.2135
+    }
   },
   {
     "storyId": "8",
@@ -117,7 +138,10 @@
     "sentiment": "desperate",
     "urgency": true,
     "placeName": "Nungambakkam",
-    "coordinates": { "latitude": 13.058, "longitude": 80.237 }
+    "coordinates": {
+      "latitude": 13.058,
+      "longitude": 80.237
+    }
   },
   {
     "storyId": "9",
@@ -132,7 +156,10 @@
     "sentiment": "urgent",
     "urgency": true,
     "placeName": "Villivakkam",
-    "coordinates": { "latitude": 13.0785, "longitude": 80.1743 }
+    "coordinates": {
+      "latitude": 13.0785,
+      "longitude": 80.1743
+    }
   },
   {
     "storyId": "10",
@@ -147,7 +174,10 @@
     "sentiment": "hopeful",
     "urgency": false,
     "placeName": "Chennai",
-    "coordinates": { "latitude": 13.0827, "longitude": 80.2707 }
+    "coordinates": {
+      "latitude": 13.0827,
+      "longitude": 80.2707
+    }
   },
   {
     "storyId": "11",
@@ -162,7 +192,10 @@
     "sentiment": "hopeful",
     "urgency": false,
     "placeName": "Ekkatuthangal",
-    "coordinates": { "latitude": 13.0228, "longitude": 80.2264 }
+    "coordinates": {
+      "latitude": 13.0228,
+      "longitude": 80.2264
+    }
   },
   {
     "storyId": "12",
@@ -177,7 +210,10 @@
     "sentiment": "desperate",
     "urgency": true,
     "placeName": "Kolathur",
-    "coordinates": { "latitude": 13.0614, "longitude": 80.186 }
+    "coordinates": {
+      "latitude": 13.0614,
+      "longitude": 80.186
+    }
   },
   {
     "storyId": "13",
@@ -192,7 +228,10 @@
     "sentiment": "urgent",
     "urgency": true,
     "placeName": "Kilpauk",
-    "coordinates": { "latitude": 13.0775, "longitude": 80.2324 }
+    "coordinates": {
+      "latitude": 13.0775,
+      "longitude": 80.2324
+    }
   },
   {
     "storyId": "14",
@@ -207,7 +246,10 @@
     "sentiment": "desperate",
     "urgency": true,
     "placeName": "Chetpet",
-    "coordinates": { "latitude": 13.0486, "longitude": 80.2225 }
+    "coordinates": {
+      "latitude": 13.0486,
+      "longitude": 80.2225
+    }
   },
   {
     "storyId": "15",
@@ -222,7 +264,10 @@
     "sentiment": "urgent",
     "urgency": true,
     "placeName": "Egmore",
-    "coordinates": { "latitude": 13.0801, "longitude": 80.2741 }
+    "coordinates": {
+      "latitude": 13.0801,
+      "longitude": 80.2741
+    }
   },
   {
     "storyId": "16",
@@ -237,7 +282,10 @@
     "sentiment": "hopeful",
     "urgency": false,
     "placeName": "Royapettah",
-    "coordinates": { "latitude": 13.0733, "longitude": 80.2591 }
+    "coordinates": {
+      "latitude": 13.0733,
+      "longitude": 80.2591
+    }
   },
   {
     "storyId": "17",
@@ -252,7 +300,10 @@
     "sentiment": "distress",
     "urgency": true,
     "placeName": "Tambaram",
-    "coordinates": { "latitude": 12.9504, "longitude": 80.1492 }
+    "coordinates": {
+      "latitude": 12.9504,
+      "longitude": 80.1492
+    }
   },
   {
     "storyId": "18",
@@ -267,7 +318,10 @@
     "sentiment": "urgent",
     "urgency": true,
     "placeName": "Mount Road",
-    "coordinates": { "latitude": 13.03, "longitude": 80.241 }
+    "coordinates": {
+      "latitude": 13.03,
+      "longitude": 80.241
+    }
   },
   {
     "storyId": "19",
@@ -282,7 +336,10 @@
     "sentiment": "desperate",
     "urgency": true,
     "placeName": "Kodambakkam",
-    "coordinates": { "latitude": 13.036, "longitude": 80.2201 }
+    "coordinates": {
+      "latitude": 13.036,
+      "longitude": 80.2201
+    }
   },
   {
     "storyId": "20",
@@ -297,6 +354,9 @@
     "sentiment": "urgent",
     "urgency": true,
     "placeName": "Pudupet",
-    "coordinates": { "latitude": 13.086, "longitude": 80.2311 }
+    "coordinates": {
+      "latitude": 13.086,
+      "longitude": 80.2311
+    }
   }
 ]
