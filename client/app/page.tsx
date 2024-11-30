@@ -17,6 +17,7 @@ const menuItems = [
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 const images = ["/Images/img5.jpg"];
 
 const page = () => {
@@ -141,12 +142,18 @@ const Header = () => {
             <span className="text-orange-500">Heal</span>
           </Link>
         </div>
-
-        <div className="hidden lg:block">
-          <Button asChild>
-            <Link href="/home">Log in</Link>
-          </Button>
-        </div>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        <SignedOut>
+          <SignInButton>
+            <div className="hidden lg:block">
+              <Button asChild>
+                <Link href="/home">Log in</Link>
+              </Button>
+            </div>
+          </SignInButton>
+        </SignedOut>
         <div className="lg:hidden">
           <Button variant="ghost" size="icon" onClick={toggleMenu}>
             <Menu className="h-6 w-6" />

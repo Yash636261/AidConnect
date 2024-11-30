@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/shared/sidebar";
-import {
-  IconArrowLeft,
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
-} from "@tabler/icons-react";
+// import {
+//   IconArrowLeft,
+//   IconBrandTabler,
+//   IconSettings,
+//   IconUserBolt,
+// } from "@tabler/icons-react";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -17,35 +18,42 @@ import { RevenueChart } from "@/components/shared/revenue-chart";
 import { ActiveCasesMap } from "@/components/shared/active-cases-map";
 import { Schedule } from "@/components/shared/schedule";
 import { ModeToggle } from "@/components/shared/modetoggle";
+import { ArrowLeft, Settings, User, LayoutDashboard } from "lucide-react";
+
+interface Links {
+  label: string;
+  href: string;
+  icon: React.JSX.Element | React.ReactNode;
+}
 
 export default function page() {
-  const links = [
+  const links: Links[] = [
     {
       label: "Dashboard",
       href: "#",
       icon: (
-        <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <LayoutDashboard className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Profile",
       href: "#",
       icon: (
-        <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <User className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Settings",
       href: "#",
       icon: (
-        <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <Settings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Logout",
       href: "#",
       icon: (
-        <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <ArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
   ];
@@ -60,8 +68,9 @@ export default function page() {
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-            {open ? <Logo /> : <LogoIcon />}
+            {/* {open ? <Logo /> : <LogoIcon />} */}
             <div className="mt-8 flex flex-col gap-2">
+              s
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}

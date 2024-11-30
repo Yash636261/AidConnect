@@ -6,13 +6,7 @@ export interface IUser extends Document {
     username: string;
     email: string;
     password?: string;
-    bio?: string;
     picture: string;
-    location?: string;
-    portfolioWebsite?: string;
-    github?: string;
-    reputation?: number;
-    saved: Schema.Types.ObjectId[];
     joinedAt: Date;
 }
 
