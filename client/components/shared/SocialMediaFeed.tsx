@@ -313,11 +313,45 @@ const SocialMediaFeed: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="twitter">Twitter</TabsTrigger>
-          <TabsTrigger value="instagram">Instagram</TabsTrigger>
-          <TabsTrigger value="facebook">Facebook</TabsTrigger>
+      <Tabs
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="w-full max-w-3xl mx-auto mb-8"
+      >
+        <TabsList className="grid w-full grid-cols-3 gap-2 p-1 h-11 bg-gray-100 dark:bg-gray-800 rounded-lg">
+          <TabsTrigger
+            value="twitter"
+            className={`py-2 px-4 rounded-md transition-all duration-200 ease-in-out ${
+              activeTab === "twitter"
+                ? "bg-white dark:bg-gray-700 shadow-sm"
+                : "hover:bg-gray-200 dark:hover:bg-gray-700"
+            } text-gray-700 dark:text-gray-200`}
+          >
+            <Twitter className="w-5 h-5 mr-2 inline-block" />
+            Twitter
+          </TabsTrigger>
+          <TabsTrigger
+            value="instagram"
+            className={`py-2 px-4 rounded-md transition-all duration-200 ease-in-out ${
+              activeTab === "instagram"
+                ? "bg-white dark:bg-gray-700 shadow-sm"
+                : "hover:bg-gray-200 dark:hover:bg-gray-700"
+            } text-gray-700 dark:text-gray-200`}
+          >
+            <Instagram className="w-5 h-5 mr-2 inline-block" />
+            Instagram
+          </TabsTrigger>
+          <TabsTrigger
+            value="facebook"
+            className={`py-2 px-4 rounded-md transition-all duration-200 ease-in-out ${
+              activeTab === "facebook"
+                ? "bg-white dark:bg-gray-700 shadow-sm"
+                : "hover:bg-gray-200 dark:hover:bg-gray-700"
+            } text-gray-700 dark:text-gray-200`}
+          >
+            <Facebook className="w-5 h-5 mr-2 inline-block" />
+            Facebook
+          </TabsTrigger>
         </TabsList>
       </Tabs>
 
@@ -347,17 +381,31 @@ const SocialMediaFeed: React.FC = () => {
           </SelectContent>
         </Select>
 
-        <div className="flex-grow">
+        <div className="flex-grow relative">
           <Input
             type="text"
             placeholder="Search posts..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-shadow duration-200 ease-in-out"
           />
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg
+              className="h-5 w-5 text-gray-400"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
         </div>
       </div>
 
-      <ScrollArea className="h-[600px] w-full rounded-md border p-4">
+      <ScrollArea className="h-[600px] w-full rounded-md border-0 py-4">
         {filteredPosts.map(renderPost)}
       </ScrollArea>
     </div>
