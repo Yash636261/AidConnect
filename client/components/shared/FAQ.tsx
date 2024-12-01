@@ -19,71 +19,72 @@ type FAQItemData = {
 const faqData: { [key: string]: FAQItemData[] } = {
   general: [
     {
-      question: "What is SwiftAid?",
+      question: "What is AidConnect?",
       answer:
-        "SwiftAid is an AI-powered disaster response platform designed to help relief teams quickly identify and prioritize victims and their needs in disaster-affected areas.",
+        "AidConnect is an AI-powered disaster response platform designed to help relief teams quickly identify and prioritize victims and their needs in disaster-affected areas.",
     },
     {
       question: "Who can use this platform?",
       answer:
-        "SwiftAid is primarily built for organizations like the National Disaster Response Force (NDRF), NGOs, and other emergency response teams. However, local authorities and volunteers can also benefit from its insights.",
+        "AidConnect is built for organizations like disaster response forces, NGOs, local authorities, and volunteers to facilitate disaster relief operations.",
     },
     {
-      question: "How does SwiftAid help during disasters?",
+      question: "How does AidConnect help during disasters?",
       answer:
-        "SwiftAid aggregates real-time data from social media, news, and official reports, processes it using AI, and visualizes key information to assist in efficient decision-making and aid delivery.",
+        "AidConnect processes real-time data from various sources and visualizes key information to assist in efficient decision-making and aid delivery.",
     },
     {
-      question: "What makes SwiftAid unique?",
+      question: "What makes AidConnect unique?",
       answer:
-        "SwiftAid combines AI-powered data analysis, interactive maps, and workflow automation to provide real-time insights, making disaster response faster and more efficient.",
+        "It combines AI-driven analysis, interactive maps, and workflow automation to provide real-time insights for faster disaster response.",
     },
   ],
   tech: [
     {
-      question: "What technologies power SwiftAid?",
+      question: "What technologies power AidConnect?",
       answer:
-        "SwiftAid uses advanced AI models like NLP for text analysis and computer vision for image recognition. The tech stack includes React for frontend, Node.js/Python for backend, and cloud services for scalability.",
+        "AidConnect leverages AI technologies like NLP and computer vision, with a tech stack including React, Node.js/Python, and cloud services.",
     },
     {
       question: "How does the platform ensure data accuracy?",
       answer:
-        "SwiftAid cross-references data from multiple sources and uses AI-driven verification techniques to filter out false or noisy information.",
+        "AidConnect cross-references data from multiple sources and uses AI-driven techniques to eliminate inaccurate or misleading information.",
     },
     {
       question: "Is the platform scalable for large-scale disasters?",
       answer:
-        "Yes, SwiftAid is built on a cloud-based infrastructure, ensuring it can handle high data volumes and provide real-time insights during large-scale disasters.",
+        "Yes, its cloud-based infrastructure ensures scalability and real-time processing during large-scale disasters.",
     },
     {
-      question: "How secure is the data collected by SwiftAid?",
+      question: "How secure is the data collected by AidConnect?",
       answer:
-        "Data security is a top priority. All sensitive data is encrypted and stored securely, and the platform adheres to international data protection standards like GDPR.",
+        "Data is encrypted and stored securely, adhering to global data protection standards like GDPR.",
     },
   ],
   random: [
     {
       question: "Can the platform be used for training or simulations?",
       answer:
-        "Yes, SwiftAid can be used for disaster response training and simulations, helping teams prepare for real-life scenarios.",
+        "Yes, AidConnect can simulate disaster scenarios for training purposes to improve response preparedness.",
     },
     {
-      question: "Does SwiftAid work in regions with limited internet access?",
+      question: "Does AidConnect work in regions with limited internet access?",
       answer:
-        "SwiftAid is designed to operate in challenging conditions. It can cache critical data locally for use in areas with poor connectivity, although some features require internet access.",
+        "It is designed for challenging conditions and can cache critical data locally, though some features require internet access.",
     },
     {
       question: "Can the platform integrate with existing tools and systems?",
       answer:
-        "Yes, SwiftAid supports integration with other tools and systems through APIs, enabling seamless collaboration and data sharing.",
+        "Yes, AidConnect provides API support for seamless integration with other systems.",
     },
     {
-      question: "How often is SwiftAid updated with new features?",
+      question: "How often is AidConnect updated with new features?",
       answer:
-        "SwiftAid is continually updated based on feedback and advancements in technology to ensure it remains effective in disaster response scenarios.",
+        "AidConnect is continuously improved based on user feedback and advancements in technology.",
     },
   ],
 };
+
 
 type FAQItemProps = {
   question: string;
@@ -107,9 +108,8 @@ const FAQItem: React.FC<FAQItemProps> = ({
         <span className="text-lg font-medium">{question}</span>
         <div>
           <svg
-            className={`size-5 text-gray-500 transition-transform duration-200 dark:text-gray-400 ${
-              isOpen ? "rotate-45" : ""
-            }`}
+            className={`size-5 text-gray-500 transition-transform duration-200 dark:text-gray-400 ${isOpen ? "rotate-45" : ""
+              }`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -138,7 +138,7 @@ const FAQ: React.FC = () => {
     <div className="mx-auto max-w-3xl text-gray-800 dark:text-gray-200 sm:p-6">
       <h1 className="mb-4 text-center text-3xl font-bold">
         <span className="bg-gradient-to-r from-green-500 via-blue-600 to-purple-500 bg-clip-text text-transparent">
-          SwiftAid{" "}
+          AidConnect{" "}
         </span>{" "}
         FAQ
       </h1>
@@ -151,11 +151,10 @@ const FAQ: React.FC = () => {
         {tabData.map((tab) => (
           <button
             key={tab.id}
-            className={`flex-1 rounded px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-              activeTab === tab.id
-                ? "border border-[#e4e4e7] bg-gray-300/40 font-semibold dark:border-[#27272a] dark:bg-gray-700/10"
-                : "border border-transparent text-gray-500 hover:bg-gray-300/40 hover:dark:border-[#27272a] hover:dark:bg-gray-700/10 hover:dark:text-gray-300"
-            }`}
+            className={`flex-1 rounded px-3 py-2 text-sm font-medium transition-colors duration-200 ${activeTab === tab.id
+              ? "border border-[#e4e4e7] bg-gray-300/40 font-semibold dark:border-[#27272a] dark:bg-gray-700/10"
+              : "border border-transparent text-gray-500 hover:bg-gray-300/40 hover:dark:border-[#27272a] hover:dark:bg-gray-700/10 hover:dark:text-gray-300"
+              }`}
             onClick={() => {
               setActiveTab(tab.id);
               setOpenItem(null);

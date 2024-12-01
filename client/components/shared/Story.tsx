@@ -21,7 +21,7 @@ export default function Story() {
     {
       title: "Our Solution",
       description:
-        "SwiftAid is an AI-powered disaster response platform that collects, analyzes, and visualizes real-time data to prioritize victims and streamline aid delivery.",
+        "AidConnect is an AI-powered disaster response platform that collects, analyzes, and visualizes real-time data to prioritize victims and streamline aid delivery.",
       skeleton: <SkeletonTwo />,
       className: "border-b col-span-1 lg:col-span-2 dark:border-neutral-800",
     },
@@ -36,7 +36,7 @@ export default function Story() {
     {
       title: "How It Helps",
       description:
-        "SwiftAid enables responders to make informed decisions, prioritize relief efforts, and save lives by delivering aid where it’s needed most, faster than ever before.",
+        "AidConnect enables responders to make informed decisions, prioritize relief efforts, and save lives by delivering aid where it’s needed most, faster than ever before.",
       skeleton: <SkeletonFour />,
       className: "col-span-1 lg:col-span-3 border-b lg:border-none",
     },

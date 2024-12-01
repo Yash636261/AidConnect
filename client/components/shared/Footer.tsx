@@ -41,7 +41,7 @@ const Footer = () => {
                 <path d="M12 4V20" />
               </svg>
               <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
-                SwiftAid
+                AidConnect
               </p>
             </div>
           </Link>

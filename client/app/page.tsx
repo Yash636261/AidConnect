@@ -41,14 +41,14 @@ const page = () => {
             <div className="lg:w-2/5 lg:pr-8">
               <div className="hidden sm:mb-8 sm:flex">
                 <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-gray-300 dark:ring-gray-300/10 dark:hover:ring-gray-300/20">
-                  We are excited to share our latest updates.{" "}
-                  <a
-                    href="#"
+                  We are excited to share our latest API support.{" "}
+                  <Link
+                    href="/doc"
                     className="font-semibold text-orange-600 dark:text-orange-400"
                   >
                     <span aria-hidden="true" className="absolute inset-0" />
                     Read more <span aria-hidden="true">&rarr;</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="text-left">
@@ -80,9 +80,8 @@ const page = () => {
                     src="/landing.jpg"
                     alt={`Product ${index + 1}`}
                     fill
-                    className={`object-cover transition-opacity duration-1000 ${
-                      index === currentImage ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`object-cover transition-opacity duration-1000 ${index === currentImage ? "opacity-100" : "opacity-0"
+                      }`}
                     priority={index === 0}
                   />
                 ))}
@@ -110,8 +109,8 @@ const Header = () => {
       <div className="mx-auto flex max-w-7xl items-center justify-between py-4 px-4 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
           <Link href="/" className="text-xl font-bold text-primary">
-            <span>Quick</span>
-            <span className="text-orange-500">Heal</span>
+            <span>Aid</span>
+            <span className="text-orange-500">Connect</span>
           </Link>
         </div>
         <SignedIn>
@@ -162,7 +161,7 @@ const Header = () => {
                 </div>
                 <div className="mt-6">
                   <Button asChild className="w-full">
-                    <Link href="/api/auth/login">Log in</Link>
+                    <Link href="/sign-up">Log in</Link>
                   </Button>
                 </div>
               </div>
