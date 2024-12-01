@@ -39,7 +39,7 @@ export default function RevenueChart() {
     ],
     datasets: [
       {
-        label: "Revenue",
+        label: "Cases",
         data: [
           300, 250, 200, 220, 280, 320, 475, 250, 230, 200, 220, 240,
         ],
