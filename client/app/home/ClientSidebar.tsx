@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import * as LucideIcons from "lucide-react";
+import { SignOutButton, SignedIn } from "@clerk/nextjs";
 
 const ModeToggle = dynamic(() => import("@/components/shared/modetoggle"), {
   ssr: false,
@@ -44,6 +45,7 @@ const Logo: React.FC<LogoProps> = ({ name, open }) => {
 
 export default function ClientSidebar({ links }: { links: Links[] }) {
   const [open, setOpen] = useState(false);
+  const animate = true; // Define the animate variable
 
   return (
     <Sidebar open={open} setOpen={setOpen}>
@@ -57,6 +59,27 @@ export default function ClientSidebar({ links }: { links: Links[] }) {
           </div>
         </div>
         <ModeToggle />
+        <SignedIn>
+          <SignOutButton>
+            <button className="flex items-center justify-start gap-2 group/sidebar py-2">
+              <LucideIcons.LogOut className="w-5 h-5 text-neutral-700 dark:text-neutral-200" />
+
+              <motion.span
+                animate={{
+                  display: animate
+                    ? open
+                      ? "inline-block"
+                      : "none"
+                    : "inline-block",
+                  opacity: animate ? (open ? 1 : 0) : 1,
+                }}
+                className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+              >
+                LogOut
+              </motion.span>
+            </button>
+          </SignOutButton>
+        </SignedIn>
       </SidebarBody>
     </Sidebar>
   );

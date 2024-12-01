@@ -41,7 +41,6 @@ const links: Links[] = [
   { label: "Profile", href: "#", icon: "User" },
   { label: "Settings", href: "#", icon: "Settings" },
   { label: "API", href: "/api", icon: "AppWindowIcon" },
-  { label: "Logout", href: "#", icon: "ArrowLeft" },
 ];
 const navlinks: NavLinks[] = [
   // { label: "Dashboard", href: "#" },

@@ -15,7 +15,6 @@ const links: Links[] = [
   { label: "Twitter", href: "/api/twitter" },
   { label: "Instagram", href: "/api/instagram" },
   { label: "Facebook", href: "/api/facebook" },
-  { label: "Logout", href: "#", icon: "ArrowLeft" },
 ];
 const ClientSidebar = dynamic(() => import("./ClientSidebar"), {
   ssr: false,
