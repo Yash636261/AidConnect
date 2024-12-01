@@ -40,12 +40,5 @@ const ClientSidebar = dynamic(() => import("./ClientSidebar"), {
 });
 
 const Dashboard = () => {
-  return (
-    <div className="flex flex-1">
-      <div className="bg-background w-full">
-        <Nav links={navlinks} />
-        <main className="p-8 space-y-8 max-h-screen overflow-y-scroll"></main>
-      </div>
-    </div>
-  );
+  return <main className="p-8 space-y-8 max-h-screen overflow-y-scroll"></main>;
 };

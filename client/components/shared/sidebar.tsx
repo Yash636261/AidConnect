@@ -19,6 +19,7 @@ const iconComponents: {
   LayoutDashboard: LucideIcons.LayoutDashboard,
   User: LucideIcons.User,
   Settings: LucideIcons.Settings,
+  Store: LucideIcons.Store,
   ArrowLeft: LucideIcons.ArrowLeft,
   // Add more icons as needed
 };

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   Card,
   CardContent,
@@ -27,6 +28,9 @@ import {
   ThumbsUp,
   MessageCircle,
   Share2,
+  MoreHorizontal,
+  Heart,
+  Send,
 } from "lucide-react";
 
 // Interfaces for our social media post types
@@ -116,7 +120,7 @@ const SocialMediaFeed: React.FC = () => {
         timestamp: new Date(),
         location: "Beachfront",
         mediaType: "image",
-        mediaUrl: "/placeholder.svg?height=200&width=200",
+        mediaUrl: "/img1.jpg",
         text: "Storm approaching! Stay safe everyone. #StormWarning",
         hashtags: ["StormWarning"],
         sentiment: "Concerned",
@@ -134,7 +138,7 @@ const SocialMediaFeed: React.FC = () => {
         timestamp: new Date(),
         location: "City Park",
         mediaType: "video",
-        mediaUrl: "/placeholder.svg?height=200&width=200",
+        mediaUrl: "/img2.jpg",
         text: "Volunteers needed for park cleanup after the storm. #CommunityHelp",
         hashtags: ["CommunityHelp"],
         sentiment: "Hopeful",
@@ -188,131 +192,246 @@ const SocialMediaFeed: React.FC = () => {
     setFilteredPosts(filtered);
   }, [activeTab, posts, urgencyFilter, sentimentFilter, searchTerm]);
 
-  const renderPost = (post: SocialMediaPost) => {
+  const SocialMediaPost: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
     if ("tweetId" in post) {
       return (
-        <Card key={post.tweetId} className="mb-4">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Twitter className="mr-2" />
-              {post.authorNameHandle}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>{post.text}</p>
-            <div className="flex items-center mt-2">
-              <MapPin className="mr-1" size={16} />
-              <span className="text-sm">{post.location}</span>
+        <Card className="mb-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200">
+          <div className="flex items-start space-x-4">
+            <Avatar className="h-10 w-10">
+              <AvatarImage
+                src={`https://avatar.vercel.sh/${post.authorNameHandle}`}
+              />
+              <AvatarFallback>{post.authorNameHandle[0]}</AvatarFallback>
+            </Avatar>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">
+                    {post.authorNameHandle.split("@")[1]}
+                  </span>
+                  <span className="text-gray-500 dark:text-gray-400">
+                    @{post.authorNameHandle.split("@")[1]}
+                  </span>
+                  <span className="text-gray-500 dark:text-gray-400">·</span>
+                  <span className="text-gray-500 dark:text-gray-400">
+                    {/* {formatDistanceToNow(post.dateTime, { addSuffix: true })} */}
+                  </span>
+                </div>
+                <button className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                  <MoreHorizontal className="h-5 w-5" />
+                </button>
+              </div>
+
+              <p className="mt-2 text-gray-900 dark:text-gray-100">
+                {post.text}
+              </p>
+
+              <div className="mt-3 flex items-center space-x-4 text-gray-500 dark:text-gray-400">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-4 w-4" />
+                  <span className="text-sm">{post.location}</span>
+                </div>
+                {post.urgencyLevel && (
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs ${
+                      post.urgencyLevel.toLowerCase() === "critical"
+                        ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                        : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                    }`}
+                  >
+                    {post.urgencyLevel}
+                  </span>
+                )}
+              </div>
+
+              {post.hashtags.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {post.hashtags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-blue-500 dark:text-blue-400 text-sm hover:underline cursor-pointer"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="flex items-center mt-1">
-              <Clock className="mr-1" size={16} />
-              <span className="text-sm">{post.dateTime.toLocaleString()}</span>
-            </div>
-          </CardContent>
-          <CardFooter>
-            <div className="flex space-x-2">
-              {post.hashtags.map((tag) => (
-                <span key={tag} className="text-blue-500">
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          </CardFooter>
+          </div>
         </Card>
       );
     } else if ("storyId" in post) {
+      function formatDistanceToNow(
+        timestamp: Date,
+        arg1: { addSuffix: boolean }
+      ): React.ReactNode {
+        throw new Error("Function not implemented.");
+      }
+
       return (
-        <Card key={post.storyId} className="mb-4">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Instagram className="mr-2" />
-              {post.username}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
+        <Card className="mb-4 overflow-hidden">
+          <div className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <Avatar className="h-10 w-10 border-0">
+                  <AvatarImage
+                    src={`https://avatar.vercel.sh/${post.username}`}
+                  />
+                  <AvatarFallback>{post.username[0]}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-semibold text-sm">{post.username}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {post.location}
+                  </p>
+                </div>
+              </div>
+              <button className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                <MoreHorizontal className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          <div className="relative">
             <img
               src={post.mediaUrl}
               alt="Instagram Story"
-              className="w-full h-48 object-cover mb-2"
+              className="w-full max-w-[50vw] mx-auto aspect-square object-cover"
             />
-            <p>{post.text}</p>
-            <div className="flex items-center mt-2">
-              <MapPin className="mr-1" size={16} />
-              <span className="text-sm">{post.location}</span>
-            </div>
-            <div className="flex items-center mt-1">
-              <Clock className="mr-1" size={16} />
-              <span className="text-sm">{post.timestamp.toLocaleString()}</span>
-            </div>
-          </CardContent>
-          <CardFooter>
-            <div className="flex space-x-2">
-              {post.hashtags.map((tag) => (
-                <span key={tag} className="text-blue-500">
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          </CardFooter>
-        </Card>
-      );
-    } else {
-      return (
-        <Card key={post.postId} className="mb-4">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Facebook className="mr-2" />
-              {post.username}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <img
-              src={post.mediaUrl}
-              alt="Facebook Post"
-              className="w-full h-48 object-cover mb-2"
-            />
-            <p>{post.text}</p>
-            <div className="flex items-center mt-2">
-              <MapPin className="mr-1" size={16} />
-              <span className="text-sm">{post.location}</span>
-            </div>
-            <div className="flex items-center mt-1">
-              <Clock className="mr-1" size={16} />
-              <span className="text-sm">{post.timestamp.toLocaleString()}</span>
-            </div>
-          </CardContent>
-          <CardFooter>
-            <div className="flex justify-between w-full">
-              <div className="flex space-x-2">
+          </div>
+
+          <div className="p-4">
+            <p className="text-sm mb-2">
+              <span className="font-semibold mr-2">{post.username}</span>
+              {post.text}
+            </p>
+
+            {post.hashtags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-2">
                 {post.hashtags.map((tag) => (
-                  <span key={tag} className="text-blue-500">
+                  <span
+                    key={tag}
+                    className="text-blue-500 dark:text-blue-400 text-xs hover:underline cursor-pointer"
+                  >
                     #{tag}
                   </span>
                 ))}
               </div>
-              <div className="flex space-x-4">
-                <span className="flex items-center">
-                  <ThumbsUp size={16} className="mr-1" />
-                  {post.likes}
-                </span>
-                <span className="flex items-center">
-                  <MessageCircle size={16} className="mr-1" />
-                  {post.comments}
-                </span>
-                <span className="flex items-center">
-                  <Share2 size={16} className="mr-1" />
-                  {post.shares}
+            )}
+
+            <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
+              <MapPin className="h-4 w-4 mr-1" />
+              {post.placeName}
+            </div>
+
+            {post.sentiment && (
+              <div className="mt-2">
+                <span
+                  className={`px-2 py-1 rounded-full text-xs ${
+                    post.sentiment.toLowerCase() === "urgent"
+                      ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                      : post.sentiment.toLowerCase() === "concerned"
+                      ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                      : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                  }`}
+                >
+                  {post.sentiment}
                 </span>
               </div>
+            )}
+          </div>
+        </Card>
+      );
+    } else {
+      return (
+        <Card className="mb-4 overflow-hidden">
+          <div className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <Avatar className="h-10 w-10 border-2 border-blue-500">
+                  <AvatarImage
+                    src={`https://avatar.vercel.sh/${post.username}`}
+                  />
+                  <AvatarFallback>{post.username[0]}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-semibold text-sm">{post.username}</p>
+                  <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                    <Clock className="h-3 w-3 mr-1" />
+                    {/* {formatDistanceToNow(post.timestamp, { addSuffix: true })} */}
+                    {post.location && (
+                      <>
+                        <span className="mx-1">•</span>
+                        <MapPin className="h-3 w-3 mr-1" />
+                        {post.location}
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <button className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                <MoreHorizontal className="h-5 w-5" />
+              </button>
             </div>
-          </CardFooter>
+          </div>
+
+          <div className="px-4 pb-3">
+            <p className="text-sm mb-2">{post.text}</p>
+
+            {post.hashtags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-2">
+                {post.hashtags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-blue-500 dark:text-blue-400 text-xs hover:underline cursor-pointer"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {post.mediaUrl && (
+            <div className="relative">
+              <img
+                src={post.mediaUrl}
+                alt="Post media"
+                className="w-full object-cover"
+                style={{ maxHeight: "400px" }}
+              />
+              {post.urgency && (
+                <span className="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-xs font-bold rounded-full">
+                  Urgent
+                </span>
+              )}
+            </div>
+          )}
+
+          <div className="p-4">
+            {post.sentiment && (
+              <div className="mt-3">
+                <span
+                  className={`px-2 py-1 rounded-full text-xs ${
+                    post.sentiment.toLowerCase() === "urgent"
+                      ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                      : post.sentiment.toLowerCase() === "concerned"
+                      ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                      : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                  }`}
+                >
+                  {post.sentiment}
+                </span>
+              </div>
+            )}
+          </div>
         </Card>
       );
     }
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className=" mx-auto p-4">
       <Tabs
         value={activeTab}
         onValueChange={setActiveTab}
@@ -406,7 +525,18 @@ const SocialMediaFeed: React.FC = () => {
       </div>
 
       <ScrollArea className="h-[600px] w-full rounded-md border-0 py-4">
-        {filteredPosts.map(renderPost)}
+        {filteredPosts.map((post) => (
+          <SocialMediaPost
+            key={
+              "tweetId" in post
+                ? post.tweetId
+                : "storyId" in post
+                ? post.storyId
+                : post.postId
+            }
+            post={post}
+          />
+        ))}
       </ScrollArea>
     </div>
   );
