@@ -35,10 +35,6 @@ export default function Page() {
   return <Dashboard />;
 }
 
-const ClientSidebar = dynamic(() => import("../home/ClientSidebar"), {
-  ssr: false,
-});
-
 const Dashboard = () => {
   return <main className="p-8 space-y-8 max-h-screen overflow-y-scroll"></main>;
 };

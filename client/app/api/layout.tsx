@@ -17,7 +17,7 @@ const links: Links[] = [
   { label: "Instagram", href: "/api/instagram" },
   { label: "Facebook", href: "/api/facebook" },
 ];
-const ClientSidebar = dynamic(() => import("./ClientSidebar"), {
+const ClientSidebar = dynamic(() => import("../home/ClientSidebar"), {
   ssr: false,
 });
 

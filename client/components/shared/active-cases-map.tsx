@@ -38,8 +38,8 @@ export default function ActiveCasesMap({ locations }: ActiveCasesMapProps) {
     L.Icon.Default.mergeOptions({
       iconRetinaUrl: "/placeholder.svg?height=41&width=27",
       iconUrl: "/placeholder.svg?height=41&width=27",
-      shadowUrl:
-        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
+      // shadowUrl:
+      //   "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
     });
   }, []);
 
@@ -91,4 +91,3 @@ export default function ActiveCasesMap({ locations }: ActiveCasesMapProps) {
     </Card>
   );
 }
-
