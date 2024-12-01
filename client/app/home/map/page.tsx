@@ -1,23 +1,8 @@
-// import React from "react";
-
-// const page = () => {
-//   const height = "calc(100vh - 36px)";
-//   return (
-//     <main className={`p-8 space-y-8 max-h-[95vh] overflow-y-scroll`}>
-//       posts
-//     </main>
-//   );
-// };
-
-// export default page;
-
 "use client";
 
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
-import { Nav } from "@/components/shared/nav";
+import axios from "axios";
 import dynamic from "next/dynamic";
-// import { ClientSidebar } from "@/components/shared/sidebar";
 
 const DynamicLeafletMap = dynamic(
   () => import("@/components/shared/LeafletMap"),
@@ -26,7 +11,15 @@ const DynamicLeafletMap = dynamic(
     loading: () => <p>Loading map...</p>,
   }
 );
+interface Location {
+  id: string;
+  name: string;
+  coordinates: [number, number];
+}
 
+interface DashboardProps {
+  locations: Location[];
+}
 interface Links {
   label: string;
   href: string;
@@ -54,28 +47,36 @@ const locations: { id: string; name: string; coordinates: [number, number] }[] =
     { id: "5", name: "Vellore", coordinates: [12.9165, 79.1325] },
   ];
 
-export default function Page() {
-  const [mapLocations, setMapLocations] = useState(locations);
-
+const Dashboard = ({ locations }: DashboardProps) => {
   return (
     <div className="rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 min-h-screen mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden h-screen">
-      {/* <ClientSidebar links={links} /> */}
-      <div
-        className={cn(
-          "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 min-h-screen mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden",
-          "h-screen"
-        )}
-      >
-        <div className="flex flex-1 flex-col">
-          <div className="bg-background w-full">
-            <main className=" flex-1 overflow-hidden">
-              <div className="h-[95vh] w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-                <DynamicLeafletMap locations={mapLocations} />
-              </div>
-            </main>
-          </div>
+      <div className="flex flex-1 flex-col">
+        <div className="bg-background w-full">
+          <main className="flex-1 overflow-hidden">
+            <div className="h-[95vh] w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+              {/* <ErrorBoundary fallback={<div>Error loading map</div>}> */}
+              <DynamicLeafletMap locations={locations} />
+              {/* </ErrorBoundary> */}
+            </div>
+          </main>
         </div>
       </div>
     </div>
   );
+};
+
+export default async function Page() {
+  try {
+    const response = await axios.get("http://localhost:8000/api/data/stats");
+    const data = response.data;
+
+    // Assuming the API returns locations in the format you need.
+    // If not, you may need to transform the data here.
+    const locations: Location[] = data.locations || [];
+
+    return <Dashboard locations={locations} />;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return <div>Error loading dashboard data</div>;
+  }
 }
