@@ -21,6 +21,7 @@ const iconComponents: {
   Settings: LucideIcons.Settings,
   Store: LucideIcons.Store,
   ArrowLeft: LucideIcons.ArrowLeft,
+  KeyRound: LucideIcons.KeyRound,
   // Add more icons as needed
 };
 
