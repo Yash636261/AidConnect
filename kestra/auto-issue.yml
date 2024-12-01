@@ -1,0 +1,25 @@
+id: create-github-issue-on-failure
+namespace: company.team
+
+tasks:
+  - id: create_issue
+    type: io.kestra.plugin.github.issues.Create
+    jwtToken: "{{ secret('GITHUB_TOKEN') }}"
+    repository: kestra-io/kestra
+    title: Kestra Workflow Failure
+    body: "{{ trigger.executionId }} has failed on {{ taskrun.startDate }}"
+    labels:
+      - bug
+      - workflow
+
+triggers:
+  - id: on_failure
+    type: io.kestra.plugin.core.trigger.Flow
+    conditions:
+      - type: io.kestra.plugin.core.condition.ExecutionStatusCondition
+        in:
+          - FAILED
+          - WARNING
+      - type: io.kestra.plugin.core.condition.ExecutionNamespaceCondition
+        namespace: company
+        comparison: PREFIX
