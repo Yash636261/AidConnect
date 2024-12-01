@@ -55,6 +55,7 @@ const Dashboard = ({ locations }: DashboardProps) => {
           <main className="flex-1 overflow-hidden">
             <div className="h-[95vh] w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               {/* <ErrorBoundary fallback={<div>Error loading map</div>}> */}
+              {/* @ts-ignore */}
               <DynamicLeafletMap locations={locations} />
               {/* </ErrorBoundary> */}
             </div>
@@ -67,7 +68,7 @@ const Dashboard = ({ locations }: DashboardProps) => {
 
 export default async function Page() {
   try {
-    const response = await axios.get("http://localhost:8000/api/data/stats");
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/data/stats`);
     const data = response.data;
 
     // Assuming the API returns locations in the format you need.
