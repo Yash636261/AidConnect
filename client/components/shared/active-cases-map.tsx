@@ -45,8 +45,8 @@ export default function ActiveCasesMap() {
       <CardContent className="p-0">
         <div className="h-[400px] w-full">
           <MapContainer
-            center={[23.593684, 78.96288]}
-            zoom={4}
+            center={[13.0827, 80.2707]}
+            zoom={11}
             style={{ height: "100%", width: "100%" }}
             className="z-0"
           >

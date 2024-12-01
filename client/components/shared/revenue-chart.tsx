@@ -24,25 +24,24 @@ ChartJS.register(
 export default function RevenueChart() {
   const data = {
     labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      "Food",
+      "Water",
+      "Shelter",
+      "Medical",
+      "Rescue",
+      "Clothing",
+      "Sanitation",
+      "Communication",
+      "Transportation",
+      "Electricity",
+      "Childcare",
+      "Elderly Care",
     ],
     datasets: [
       {
         label: "Revenue",
         data: [
-          30000, 25000, 20000, 22000, 28000, 32000, 47500, 25000, 23000, 20000,
-          22000, 24000,
+          300, 250, 200, 220, 280, 320, 475, 250, 230, 200, 220, 240,
         ],
         backgroundColor: "rgb(99, 102, 241)",
         borderRadius: 8,
