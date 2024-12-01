@@ -43,3 +43,11 @@ AidConnect is a disaster relief web application designed to centralize and analy
    git clone https://github.com/your-repo-name/technodes.git
    cd technodes
 
+2. **Install Dependencies:**
+   -***Client***:
+   ```bash
+   cd client
+   npm install
+
+
+
