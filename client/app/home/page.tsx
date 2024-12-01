@@ -6,17 +6,25 @@ import PostsTable from "@/components/shared/posts-table";
 const Metrics = dynamic(() => import("@/components/shared/metrics"), {
   ssr: false,
 });
-const RevenueChart = dynamic(
-  () => import("@/components/shared/revenue-chart"),
-  { ssr: false }
-);
+const NeedsChart = dynamic(() => import("@/components/shared/needs-chart"), {
+  ssr: false,
+});
 const ActiveCasesMap = dynamic(
   () => import("@/components/shared/active-cases-map"),
   { ssr: false }
 );
-const ModeToggle = dynamic(() => import("@/components/shared/modetoggle"), {
-  ssr: false,
-});
+const UrgencyLevelPieChart = dynamic(
+  () => import("@/components/shared/urgency-level-pie-chart"),
+  { ssr: false }
+);
+const SentimentAnalysisChart = dynamic(
+  () => import("@/components/shared/sentiment-analysis-chart"),
+  { ssr: false }
+);
+const SourceDistributionChart = dynamic(
+  () => import("@/components/shared/source-distribution-chart"),
+  { ssr: false }
+);
 
 interface NavLinks {
   label: string;
@@ -47,14 +55,18 @@ const Dashboard = ({ data }: any) => {
   const height = "calc(100vh - 36px)";
   return (
     <main className="p-8 space-y-8 max-h-screen overflow-y-scroll">
+      <h1 className="text-4xl font-bold mb-8">Disaster Relief Dashboard</h1>
       <Metrics data={data} />
       <div className="grid gap-8 md:grid-cols-2">
-        <RevenueChart needs={data.needs} />
+        <NeedsChart needs={data.needs} />
         <ActiveCasesMap locations={data.locations} />
       </div>
-
+      <div className="grid gap-8 md:grid-cols-3">
+        <UrgencyLevelPieChart urgencyLevels={data.urgencyLevels} />
+        <SentimentAnalysisChart sentiments={data.sentiments} />
+        <SourceDistributionChart sources={data.sources} />
+      </div>
       <PostsTable posts={data?.posts} />
-      {/* <Schedule /> */}
     </main>
   );
 };

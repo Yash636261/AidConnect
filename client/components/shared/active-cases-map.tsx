@@ -8,8 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Custom pin icon
 const customIcon = new L.Icon({
-  iconUrl: "https://www.svgrepo.com/show/340326/flood-warning.svg",
-  iconRetinaUrl: "https://www.svgrepo.com/show/340326/flood-warning.svg",
+  iconUrl: "https://www.svgrepo.com/show/535493/map-pin.svg",
+  iconRetinaUrl: "https://www.svgrepo.com/show/535493/map-pin.svg",
   iconSize: [27, 41],
   iconAnchor: [13.5, 41],
   popupAnchor: [0, -41],
@@ -39,7 +39,7 @@ export default function ActiveCasesMap({ locations }: ActiveCasesMapProps) {
       iconRetinaUrl: "/placeholder.svg?height=41&width=27",
       iconUrl: "/placeholder.svg?height=41&width=27",
       // shadowUrl:
-      //   "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
+      // "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
     });
   }, []);
 

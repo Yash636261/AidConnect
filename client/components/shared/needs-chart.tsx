@@ -1,38 +1,70 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
+"use client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 interface NeedsChartProps {
-  data: Record<string, number>
+  needs: Record<string, number>;
 }
 
-export default function NeedsChart({ data }: NeedsChartProps) {
-  const chartData = Object.entries(data).map(([name, value]) => ({ name, value }))
+export default function NeedsChart({ needs }: NeedsChartProps) {
+  const labels = Object.keys(needs);
+  const values = Object.values(needs);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Number of Cases",
+        data: values,
+        backgroundColor: "hsl(var(--primary))",
+        borderRadius: 8,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Top Needs</CardTitle>
+        <CardTitle>Needs Distribution</CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={{
-            value: { label: "Count", color: "hsl(var(--chart-1))" },
-          }}
-          className="h-[300px]"
-        >
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="value" fill="var(--color-value)" />
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartContainer>
+        <div className="h-[300px]">
+          <Bar data={data} options={options} />
+        </div>
       </CardContent>
     </Card>
-  )
+  );
 }
-
