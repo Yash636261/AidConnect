@@ -28,5 +28,14 @@ AidConnect is a disaster relief web application designed to centralize and analy
    - Exposes RESTful APIs for managing and querying centralized disaster data.
 
 
+## Technologies Used
+
+- **Frontend**: Next.js, TypeScript, TailwindCSS
+- **Backend**: Express.js, TypeScript, Node.js
+- **Database**: MongoDB
+- **LLMs**: Integrated for text processing and insights generation
+- **Deployment**: Render, Vercel (or similar hosting platforms)
+
+
 
 
