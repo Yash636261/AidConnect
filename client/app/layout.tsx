@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Jivan Sarthi",
-  description: "Jivan Sarthi is a platform that connects volunteers with NGOs in disaster-affected areas.",
+  title: "AidConnect",
+  description: "AidConnect is a platform that connects volunteers with NGOs in disaster-affected areas.",
 };
 
 export default function RootLayout({
