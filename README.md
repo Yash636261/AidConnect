@@ -27,27 +27,6 @@ AidConnect is a disaster relief web application designed to centralize and analy
 5. **API Endpoints**:
    - Exposes RESTful APIs for managing and querying centralized disaster data.
 
----
-
-## Setup Instructions
-
-### Prerequisites
-- Node.js (16.x or later)
-- MongoDB or PostgreSQL (for database)
-- Environment files (`.env` and `.env.local`)
-
-### Installation
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-repo-name/technodes.git
-   cd technodes
-
-2. **Install Dependencies:**
-   -***Client***:
-   ```bash
-   cd client
-   npm install
 
 
 
