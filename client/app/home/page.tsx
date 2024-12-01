@@ -68,10 +68,10 @@ const Dashboard = ({ data }: any) => {
         <NeedsChart needs={data.needs} />
         <ActiveCasesMap locations={data.locations} />
       </div>
-      <div className="grid gap-8 md:grid-cols-3">
+      <div className="grid gap-8 md:grid-cols-2">
         <UrgencyLevelPieChart urgencyLevels={data.urgencyLevels} />
         <SentimentAnalysisChart sentiments={data.sentiments} />
-        <SourceDistributionChart  sourceCounts={data.sourceCounts} />
+        {/* <SourceDistributionChart  sourceCounts={data.sourceCounts} /> */}
       </div>
       <PostsTable posts={data?.posts} />
     </main>
