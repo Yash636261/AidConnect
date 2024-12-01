@@ -8,8 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Custom pin icon
 const customIcon = new L.Icon({
-  iconUrl: "/placeholder.svg?height=41&width=27",
-  iconRetinaUrl: "/placeholder.svg?height=41&width=27",
+  iconUrl: "https://www.svgrepo.com/show/340326/flood-warning.svg",
+  iconRetinaUrl: "https://www.svgrepo.com/show/340326/flood-warning.svg",
   iconSize: [27, 41],
   iconAnchor: [13.5, 41],
   popupAnchor: [0, -41],
@@ -18,16 +18,19 @@ const customIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-// Sample data for active cases
-const activeCases = [
-  { id: 1, lat: 40.7128, lng: -74.006, city: "New York", cases: 1500 },
-  { id: 2, lat: 34.0522, lng: -118.2437, city: "Los Angeles", cases: 1200 },
-  { id: 3, lat: 41.8781, lng: -87.6298, city: "Chicago", cases: 900 },
-  { id: 4, lat: 29.7604, lng: -95.3698, city: "Houston", cases: 800 },
-  { id: 5, lat: 33.749, lng: -84.388, city: "Atlanta", cases: 600 },
-];
+interface Location {
+  id: string;
+  lat: number;
+  lng: number;
+  urgencyLevel: string;
+  needs: string[];
+}
 
-export default function ActiveCasesMap() {
+interface ActiveCasesMapProps {
+  locations: Location[];
+}
+
+export default function ActiveCasesMap({ locations }: ActiveCasesMapProps) {
   useEffect(() => {
     // This is needed to properly load the map tiles
     const L = require("leaflet");
@@ -40,12 +43,25 @@ export default function ActiveCasesMap() {
     });
   }, []);
 
+  // Calculate the center of the map based on the average of all locations
+  const center = locations.reduce(
+    (acc, loc) => {
+      acc[0] += loc.lat / locations.length;
+      acc[1] += loc.lng / locations.length;
+      return acc;
+    },
+    [0, 0]
+  );
+
   return (
-    <Card className="w-full p-o overflow-hidden">
+    <Card className="w-full p-0 overflow-hidden">
+      <CardHeader>
+        <CardTitle>Active Cases Map</CardTitle>
+      </CardHeader>
       <CardContent className="p-0">
         <div className="h-[400px] w-full">
           <MapContainer
-            center={[13.0827, 80.2707]}
+            center={center as [number, number]}
             zoom={11}
             style={{ height: "100%", width: "100%" }}
             className="z-0"
@@ -54,16 +70,18 @@ export default function ActiveCasesMap() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {activeCases.map((caseData) => (
+            {locations.map((location) => (
               <Marker
-                key={caseData.id}
-                position={[caseData.lat, caseData.lng]}
+                key={location.id}
+                position={[location.lat, location.lng]}
                 icon={customIcon}
               >
                 <Popup>
-                  <strong>{caseData.city}</strong>
+                  <strong>Location ID: {location.id}</strong>
                   <br />
-                  Active cases: {caseData.cases}
+                  Urgency Level: {location.urgencyLevel}
+                  <br />
+                  Needs: {location.needs.join(", ")}
                 </Popup>
               </Marker>
             ))}
@@ -73,3 +91,4 @@ export default function ActiveCasesMap() {
     </Card>
   );
 }
+

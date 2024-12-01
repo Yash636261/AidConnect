@@ -35,7 +35,7 @@ export default function Page() {
   return <Dashboard />;
 }
 
-const ClientSidebar = dynamic(() => import("./ClientSidebar"), {
+const ClientSidebar = dynamic(() => import("../home/ClientSidebar"), {
   ssr: false,
 });
 

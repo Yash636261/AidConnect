@@ -21,29 +21,21 @@ ChartJS.register(
   Legend
 );
 
-export default function RevenueChart() {
+interface RevenueChartProps {
+  needs: Record<string, number>;
+}
+
+export default function RevenueChart({ needs }: RevenueChartProps) {
+  const labels = Object.keys(needs);
+  const values = Object.values(needs);
+
   const data = {
-    labels: [
-      "Food",
-      "Water",
-      "Shelter",
-      "Medical",
-      "Rescue",
-      "Clothing",
-      "Sanitation",
-      "Communication",
-      "Transportation",
-      "Electricity",
-      "Childcare",
-      "Elderly Care",
-    ],
+    labels,
     datasets: [
       {
-        label: "Revenue",
-        data: [
-          300, 250, 200, 220, 280, 320, 475, 250, 230, 200, 220, 240,
-        ],
-        backgroundColor: "rgb(99, 102, 241)",
+        label: "Cases",
+        data: values,
+        backgroundColor: "hsl(var(--primary))",
         borderRadius: 8,
       },
     ],
@@ -54,7 +46,6 @@ export default function RevenueChart() {
     maintainAspectRatio: false,
     scales: {
       x: {
-        type: "category" as const,
         grid: {
           display: false,
         },
@@ -65,30 +56,42 @@ export default function RevenueChart() {
           borderDash: [2],
           color: "rgba(0, 0, 0, 0.1)",
         },
+        ticks: {
+          precision: 0,
+        },
       },
     },
     plugins: {
       legend: {
         display: false,
       },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => `Cases: ${context.parsed.y}`,
+        },
+      },
     },
   };
+
+  const totalCases = values.reduce((sum, value) => sum + value, 0);
+  const avgCasesPerNeed = Math.round(totalCases / labels.length);
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Overview</CardTitle>
-        <p className="text-sm text-muted-foreground">Avg per month</p>
+        <CardTitle>Needs Overview</CardTitle>
+        <p className="text-sm text-muted-foreground">Avg cases per need</p>
         <div className="flex items-baseline space-x-2">
-          <h3 className="text-2xl font-bold">138,500</h3>
-          {/* <span className="text-sm text-green-600">13.4% ↑</span> */}
+          <h3 className="text-2xl font-bold">{avgCasesPerNeed}</h3>
+          <span className="text-sm text-primary">Total: {totalCases}</span>
         </div>
       </CardHeader>
       <CardContent>
-        <div className="h-[200px]">
+        <div className="h-[300px]">
           <Bar data={data} options={options} />
         </div>
       </CardContent>
     </Card>
   );
 }
+

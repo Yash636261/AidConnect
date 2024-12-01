@@ -1,6 +1,6 @@
 import express from 'express';
 import { getTweets, getPosts, getStories,getAllSources } from '../controllers/source.controller';
-import { createBulkTweets,createBulkFacebookPosts, createBulkInstagramStories } from '../controllers/action.controller';
+import { createBulkTweets,createBulkFacebookPosts, createBulkInstagramStories,createBulkDisasterCases } from '../controllers/action.controller';
 
 const router = express.Router();
 
@@ -13,4 +13,5 @@ router.post("/create-bulkPost", createBulkFacebookPosts);
 
 // Route to fetch stories
 router.post("/create-bulkStories", createBulkInstagramStories);
+router.post('/create-disaster-cases', createBulkDisasterCases);
 export default router;
