@@ -6,6 +6,7 @@ import { Nav } from "@/components/shared/nav";
 import dynamic from "next/dynamic";
 
 import * as LucideIcons from "lucide-react";
+import SocialMediaFeed from "@/components/shared/SocialMediaFeed";
 
 const Metrics = dynamic(() => import("@/components/shared/metrics"), {
   ssr: false,
@@ -77,7 +78,7 @@ const Dashboard = () => {
             <RevenueChart />
             <ActiveCasesMap />
           </div>
-          <Schedule />
+          <SocialMediaFeed />
         </main>
       </div>
     </div>
