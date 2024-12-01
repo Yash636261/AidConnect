@@ -19,19 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Facebook,
-  Instagram,
-  Twitter,
-  MapPin,
-  Clock,
-  ThumbsUp,
-  MessageCircle,
-  Share2,
-  MoreHorizontal,
-  Heart,
-  Send,
-} from "lucide-react";
+import { Facebook, Instagram, Twitter, MapPin, Clock, ThumbsUp, MessageCircle, Share2, MoreHorizontal, Heart, Send } from 'lucide-react';
 
 // Interfaces for our social media post types
 interface ITweet {
@@ -149,6 +137,58 @@ const SocialMediaFeed: React.FC = () => {
         comments: 10,
         shares: 5,
       },
+      {
+        tweetId: 2,
+        text: "Water levels rising rapidly in the eastern suburbs. Evacuation may be necessary soon. Stay alert! #FloodWarning",
+        location: "Eastern Suburbs",
+        urgencyLevel: "High",
+        needs: ["Evacuation", "Sandbags"],
+        sentiment: "Concerned",
+        hashtags: ["FloodWarning"],
+        dateTime: new Date(),
+        geolocation: "Eastern City Area",
+        authorNameHandle: "@cityalert",
+        source: "Twitter",
+      },
+      {
+        tweetId: 3,
+        text: "Power outage reported in the northern district due to storm damage. Crews are working on repairs. #StormUpdate",
+        location: "Northern District",
+        urgencyLevel: "Medium",
+        needs: ["Electricity", "Emergency Supplies"],
+        sentiment: "Informative",
+        hashtags: ["StormUpdate"],
+        dateTime: new Date(),
+        geolocation: "Northern City Area",
+        authorNameHandle: "@powercompany",
+        source: "Twitter",
+      },
+      {
+        tweetId: 4,
+        text: "Volunteers needed at the community center to help with food distribution. Every hand counts! #DisasterRelief",
+        location: "City Center",
+        urgencyLevel: "Medium",
+        needs: ["Volunteers", "Food Supplies"],
+        sentiment: "Hopeful",
+        hashtags: ["DisasterRelief"],
+        dateTime: new Date(),
+        geolocation: "Central City",
+        authorNameHandle: "@helpinghands",
+        source: "Twitter",
+      },
+      {
+        tweetId: 5,
+        text: "Road closure alert: Main Street bridge is unsafe due to flood damage. Seek alternate routes. #TrafficAlert",
+        location: "Downtown",
+        urgencyLevel: "High",
+        needs: ["Traffic Management", "Infrastructure Repair"],
+        sentiment: "Urgent",
+        hashtags: ["TrafficAlert"],
+        dateTime: new Date(),
+        geolocation: "City Center",
+        authorNameHandle: "@trafficdept",
+        source: "Twitter",
+      },
     ];
     setPosts(mockPosts);
     setFilteredPosts(mockPosts);
@@ -261,13 +301,6 @@ const SocialMediaFeed: React.FC = () => {
         </Card>
       );
     } else if ("storyId" in post) {
-      function formatDistanceToNow(
-        timestamp: Date,
-        arg1: { addSuffix: boolean }
-      ): React.ReactNode {
-        throw new Error("Function not implemented.");
-      }
-
       return (
         <Card className="mb-4 overflow-hidden">
           <div className="p-4">
@@ -543,3 +576,4 @@ const SocialMediaFeed: React.FC = () => {
 };
 
 export default SocialMediaFeed;
+

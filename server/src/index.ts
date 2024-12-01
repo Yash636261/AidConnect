@@ -4,6 +4,7 @@ import source from "./routes/source.route";
 import Disastercase from "./routes/Disastercase.route";
 import { connectDB } from "./db/connectDB";
 import scraping from "./routes/scraping.route";
+import {transformData} from "./controllers/disaster.controller";
 
 
 const app = express();
@@ -14,12 +15,8 @@ app.get("/test", (req: express.Request, res: express.Response) => {
   res.send("Hello! the server is up and running");
 });
 
-app.use("/api/data", Disastercase);
-                             
 
-// app.get("/data", (req: express.Request, res: express.Response) => {
-//   res.send({data  });
-// });
+app.use("/api/data", Disastercase);                            
 app.use("/api/source", source);
 app.use("/api/actions", actions);
 app.use("/api/scraping", scraping);

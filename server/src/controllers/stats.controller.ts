@@ -10,7 +10,8 @@ export const generateStats = async (req: Request, res: Response): Promise<void> 
       verifiedPosts,
       needs,
       posts,
-      locations
+      locations,
+      sourceCounts
     ] = await Promise.all([
       getTotalPosts(),
       getUrgencyLevels(),
@@ -18,7 +19,8 @@ export const generateStats = async (req: Request, res: Response): Promise<void> 
       getVerifiedPosts(),
       getNeeds(),
       getPosts(),
-      getLocations()
+      getLocations(),
+      getSourceCounts()
     ]);
 
     res.status(200).json({
@@ -28,7 +30,8 @@ export const generateStats = async (req: Request, res: Response): Promise<void> 
       verifiedPosts,
       needs,
       posts,
-      locations
+      locations,
+      sourceCounts
     });
   } catch (error: any) {
     res.status(500).json({ 
@@ -151,3 +154,25 @@ async function getLocations() {
   ]);
 }
 
+async function getSourceCounts() {
+  const result = await DisasterCase.aggregate([
+    {
+      $group: {
+        _id: "$source",
+        count: { $sum: 1 }
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        source: "$_id",
+        count: 1
+      }
+    }
+  ]);
+
+  return result.reduce((acc, { source, count }) => {
+    acc[source.toLowerCase()] = count;
+    return acc;
+  }, {});
+}
