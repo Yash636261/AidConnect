@@ -1,0 +1,76 @@
+id: final.weMakesDevs
+namespace: technodes.wemakedevs
+
+tasks:
+  # Task 1: Fetch Twitter Posts
+  - id: fetch-twitter-posts
+    type: io.kestra.plugin.mongodb.Find
+    connection:
+      uri: "{{ env.MONGODB_URI }}"
+    database: "{{ env.MONGODB_DATABASE }}"
+    collection: "tweets"
+    filter: {}
+    limit: 100
+    store: false
+
+  # Task 2: Fetch Instagram Stories
+  - id: fetch-instagram-stories
+    type: io.kestra.plugin.mongodb.Find
+    connection:
+      uri: "{{ env.MONGODB_URI }}"
+    database: "{{ env.MONGODB_DATABASE }}"
+    collection: "instagramstories"
+    filter: {}
+    limit: 100
+    store: false
+
+  # Task 3: Fetch Facebook Posts
+  - id: fetch-facebook-posts
+    type: io.kestra.plugin.mongodb.Find
+    connection:
+      uri: "{{ env.MONGODB_URI }}"
+    database: "{{ env.MONGODB_DATABASE }}"
+    collection: "facebookposts"
+    filter: {}
+    limit: 100
+    store: false
+
+  # Task 4: Transform Tweets,Facebook and Instagram Posts into centralDB
+  - id: disaster_case_api
+    type: io.kestra.plugin.core.http.Request
+    uri: https://technodes.onrender.com/api/data/transform
+    method: POST
+    contentType: application/json
+    body: >
+      {
+       "twitter": {{ outputs['fetch-twitter-posts'].rows  }},
+        "instagram": {{ outputs['fetch-instagram-stories'].rows  }},
+       "facebook": {{ outputs['fetch-facebook-posts'].rows }}
+      }
+  - id: print_status
+    type: io.kestra.plugin.core.log.Log
+    message: '{{ outputs.disaster_case_api["body"] }}'
+  #  Classify Posts as Need or Availability
+  - id: classify_api
+    type: io.kestra.plugin.core.http.Request
+    uri: https://technodes.onrender.com/api/data/classify
+    method: POST
+    contentType: application/json
+    body: >
+      {
+       "data": {{ outputs.disaster_case_api["body"] }}
+      }
+  - id: llm_insights
+    type: io.kestra.plugin.core.http.Request
+    uri: https://technodes.onrender.com/api/data/llm-insights
+    method: POST
+    contentType: application/json
+    body: >
+      {
+       "classifiedData": {{ outputs['classify_api'].body }},
+       "task": "generate insights about the posts that can help with disaster relief"
+      }
+
+  - id: print_llm_insights
+    type: io.kestra.plugin.core.log.Log
+    message: '{{ outputs.llm_insights["body"] }}'

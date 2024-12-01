@@ -71,7 +71,7 @@ const Dashboard = ({ data }: any) => {
       <div className="grid gap-8 md:grid-cols-3">
         <UrgencyLevelPieChart urgencyLevels={data.urgencyLevels} />
         <SentimentAnalysisChart sentiments={data.sentiments} />
-        <SourceDistributionChart sources={data.sources} />
+        <SourceDistributionChart  sourceCounts={data.sourceCounts} />
       </div>
       <PostsTable posts={data?.posts} />
     </main>

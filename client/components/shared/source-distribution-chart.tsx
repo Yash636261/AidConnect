@@ -1,3 +1,4 @@
+"use client"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -5,14 +6,14 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface SourceDistributionChartProps {
-  sources: Record<string, number>;
+  sourceCounts: Record<string, number>;
 }
 
 export default function SourceDistributionChart({
-  sources,
+  sourceCounts
 }: SourceDistributionChartProps) {
-  const labels = sources ? Object.keys(sources) : [];
-  const values = sources ? Object.values(sources) : [];
+  const labels = Object.keys(sourceCounts);
+  const values = Object.values(sourceCounts);
 
   const data = {
     labels,
@@ -27,6 +28,22 @@ export default function SourceDistributionChart({
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom' as const,
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => {
+            const label = context.label || '';
+            const value = context.raw || 0;
+            const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+            const percentage = ((value / total) * 100).toFixed(2);
+            return `${label}: ${value} (${percentage}%)`;
+          }
+        }
+      }
+    }
   };
 
   return (
@@ -35,7 +52,7 @@ export default function SourceDistributionChart({
         <CardTitle>Source Distribution</CardTitle>
       </CardHeader>
       <CardContent>
-        {sources ? (
+        {Object.keys(sourceCounts).length > 0 ? (
           <div className="h-[300px]">
             <Pie data={data} options={options} />
           </div>

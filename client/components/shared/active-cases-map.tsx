@@ -42,16 +42,11 @@ export default function ActiveCasesMap({ locations }: ActiveCasesMapProps) {
       // "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
     });
   }, []);
-
+  const CHENNAI_LAT = 13.0827;
+  const CHENNAI_LNG = 80.2707;
+  
   // Calculate the center of the map based on the average of all locations
-  const center = locations.reduce(
-    (acc, loc) => {
-      acc[0] += loc.lat / locations.length;
-      acc[1] += loc.lng / locations.length;
-      return acc;
-    },
-    [0, 0]
-  );
+  const center = [CHENNAI_LAT ,CHENNAI_LNG];
 
   return (
     <Card className="w-full p-0 overflow-hidden rounded-2xl">
