@@ -166,9 +166,8 @@ For detailed guides, FAQs, or community support, refer to:
 
 Feel free to raise issues or submit queries. Happy Scraping!
       `
-
             const mdxSource = await serialize(markdown)
-            setMdxSource(mdxSource)
+            setMdxSource(mdxSource as any) // Type assertion to fix type error
         }
 
         loadMdxSource()
@@ -177,7 +176,7 @@ Feel free to raise issues or submit queries. Happy Scraping!
     return (
         <Layout>
             <div className="prose max-w-none">
-                {mdxSource && <MDXRemote {...mdxSource} />}
+                {mdxSource && <MDXRemote {...mdxSource as any} />}
             </div>
         </Layout>
     )

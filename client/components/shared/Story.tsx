@@ -253,12 +253,12 @@ export const Globe = ({ className }: { className?: string }) => {
         { location: [18.96667, 72.83333], size: 0.03 },
         { location: [13.08784, 80.27847], size: 0.1 },
       ],
-      // onRender: (state) => {
-      //   // Called on every animation frame.
-      //   // `state` will be an empty object, return updated params.
-      //   state.phi = phi;
-      //   phi += 0.01;
-      // },
+      onRender: (state) => {
+        // Called on every animation frame.
+        // `state` will be an empty object, return updated params.
+        state.phi = phi;
+        phi += 0.01;
+      },
     });
 
     return () => {
