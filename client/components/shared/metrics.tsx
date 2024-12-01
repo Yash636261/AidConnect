@@ -1,93 +1,126 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { LineChart, AlertTriangle, Users, Calendar } from "lucide-react";
+"use client";
 
-import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
+import { LineChart, Line, ResponsiveContainer } from "recharts";
+import {
+  ArrowDown,
+  ArrowUp,
+  AlertTriangle,
+  Users,
+  CheckCircle,
+  MessageCircle,
+} from "lucide-react";
 
 interface MetricCardProps {
   title: string;
-  value: string;
+  value: number;
   change: string;
-  trend: "up" | "down";
   icon: React.ReactNode;
+  data: { value: number }[];
 }
 
-function MetricCard({ title, value, change, trend, icon }: MetricCardProps) {
+function MetricCard({ title, value, change, icon, data }: MetricCardProps) {
+  const changeValue = parseFloat(change);
+  const isPositive = changeValue >= 0;
+
   return (
-    <Card className="border-0 bg-white dark:bg-neutral-900 hover:bg-gray-100 dark:hover:bg-neutral-950 shadow-md hover:shadow-lg rounded-2xl">
-      <CardContent className="p-4 border-0">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground">{title}</p>
-            <h3 className="text-3xl font-bold">{value}</h3>
-          </div>
-          <div className="flex flex-col items-end">
-            {icon}
-            <p
-              className={cn(
-                "text-sm",
-                trend === "up" ? "text-green-600" : "text-red-600"
-              )}
+    <Card className="p-6 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-gray-800 dark:via-gray-900 dark:to-black ">
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
+          <div className="mt-2 flex items-baseline gap-2">
+            <p className="text-2xl font-bold">{value.toLocaleString()}</p>
+            <span
+              className={`flex items-center text-sm font-medium ${
+                isPositive ? "text-green-600" : "text-red-600"
+              }`}
             >
-              {change}
-            </p>
+              {isPositive ? (
+                <ArrowUp className="h-4 w-4" />
+              ) : (
+                <ArrowDown className="h-4 w-4" />
+              )}
+              {Math.abs(changeValue).toFixed(2)}%
+            </span>
           </div>
         </div>
-      </CardContent>
+        <div className="p-2 bg-gray-100 rounded-full dark:bg-gray-800">
+          {icon}
+        </div>
+      </div>
+      <p className="text-sm text-muted-foreground mt-1">
+        compared to last week
+      </p>
+      <div className="h-[80px] mt-4">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data}>
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke={isPositive ? "#22c55e" : "#ef4444"}
+              strokeWidth={2}
+              dot={false}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </Card>
   );
 }
 
-export default function Metrics({ data }: any) {
-  const calculateChange = (current: number, previous: number) => {
-    const change = ((current - previous) / previous) * 100;
-    return change.toFixed(2) + "%";
-  };
+// Sample data for the sparklines
+const generateSparklineData = (points: number, isPositive: boolean) =>
+  Array.from({ length: points }, (_, i) => ({
+    value: isPositive
+      ? Math.floor(Math.random() * 100) + i
+      : 100 - Math.floor(Math.random() * 100) - i,
+  }));
+
+export default function Metrics({ data }: { data: any }) {
+  const metrics = [
+    {
+      title: "Total Posts",
+      value: data.totalPosts,
+      change: "66.95",
+      icon: <MessageCircle className="h-6 w-6 text-blue-500" />,
+      data: generateSparklineData(20, true),
+    },
+    {
+      title: "High Urgency",
+      value: data.urgencyLevels.high,
+      change: "12.05",
+      icon: <AlertTriangle className="h-6 w-6 text-red-500" />,
+      data: generateSparklineData(20, true),
+    },
+    {
+      title: "Verified Posts",
+      value: data.verifiedPosts,
+      change: "4.11",
+      icon: <CheckCircle className="h-6 w-6 text-green-500" />,
+      data: generateSparklineData(20, true),
+    },
+    {
+      title: "Resolved Cases",
+      value:
+        data.totalPosts - data.urgencyLevels.high - data.urgencyLevels.moderate,
+      change: "27.47",
+      icon: <Users className="h-6 w-6 text-purple-500" />,
+      data: generateSparklineData(20, true),
+    },
+  ];
 
   return (
-    <div className="grid gap-4 md:grid-cols-4">
-      <MetricCard
-        title="Total Posts"
-        value={data.totalPosts.toString()}
-        change={calculateChange(data.totalPosts, data.totalPosts * 0.6)} // Assuming 60% increase
-        trend="up"
-        icon={<LineChart className="h-10 w-10 text-muted-foreground/50" />}
-      />
-      <MetricCard
-        title="High Urgency"
-        value={data.urgencyLevels.high.toString()}
-        change={calculateChange(
-          data.urgencyLevels.high,
-          data.urgencyLevels.high * 0.9
-        )} // Assuming 10% increase
-        trend="up"
-        icon={<AlertTriangle className="h-10 w-10 text-red-500/50" />}
-      />
-      <MetricCard
-        title="Verified Posts"
-        value={data.verifiedPosts.toString()}
-        change={calculateChange(data.verifiedPosts, data.verifiedPosts * 0.96)} // Assuming 4% increase
-        trend="up"
-        icon={<Users className="h-10 w-10 text-blue-500/50" />}
-      />
-      <MetricCard
-        title="Resolved Cases"
-        value={(
-          data.totalPosts -
-          data.urgencyLevels.high -
-          data.urgencyLevels.moderate
-        ).toString()}
-        change={calculateChange(
-          data.totalPosts -
-            data.urgencyLevels.high -
-            data.urgencyLevels.moderate,
-          (data.totalPosts -
-            data.urgencyLevels.high -
-            data.urgencyLevels.moderate) *
-            0.78
-        )} // Assuming 22% increase
-        trend="up"
-        icon={<Calendar className="h-10 w-10 text-green-500/50" />}
-      />
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {metrics.map((metric) => (
+        <MetricCard
+          key={metric.title}
+          title={metric.title}
+          value={metric.value}
+          change={metric.change}
+          icon={metric.icon}
+          data={metric.data}
+        />
+      ))}
     </div>
   );
 }
