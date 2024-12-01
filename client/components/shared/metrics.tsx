@@ -37,34 +37,40 @@ function MetricCard({ title, value, change, trend, icon }: MetricCardProps) {
   );
 }
 
-export default function Metrics() {
+export default function Metrics({data}: any) {
+  const calculateChange = (current: number, previous: number) => {
+    const change = ((current - previous) / previous) * 100;
+    return change.toFixed(2) + '%';
+  };
+
   return (
     <div className="grid gap-4 md:grid-cols-4">
       <MetricCard
         title="Total Posts"
-        value="6025"
-        change="66.95%"
+        value={data.totalPosts.toString()}
+        change={calculateChange(data.totalPosts, data.totalPosts * 0.6)} // Assuming 60% increase
         trend="up"
         icon={<LineChart className="h-10 w-10 text-muted-foreground/50" />}
       />
       <MetricCard
         title="High Urgency"
-        value="1873"
-        change="12.05%"
+        value={data.urgencyLevels.high.toString()}
+        change={calculateChange(data.urgencyLevels.high, data.urgencyLevels.high * 0.9)} // Assuming 10% increase
         trend="up"
         icon={<AlertTriangle className="h-10 w-10 text-red-500/50" />}
       />
       <MetricCard
         title="Verified Posts"
-        value="4152"
-        change="4.11%"
+        value={data.verifiedPosts.toString()}
+        change={calculateChange(data.verifiedPosts, data.verifiedPosts * 0.96)} // Assuming 4% increase
         trend="up"
         icon={<Users className="h-10 w-10 text-blue-500/50" />}
       />
       <MetricCard
         title="Resolved Cases"
-        value="2314"
-        change="27.47%"
+        value={(data.totalPosts - data.urgencyLevels.high - data.urgencyLevels.moderate).toString()}
+        change={calculateChange(data.totalPosts - data.urgencyLevels.high - data.urgencyLevels.moderate, 
+                                (data.totalPosts - data.urgencyLevels.high - data.urgencyLevels.moderate) * 0.78)} // Assuming 22% increase
         trend="up"
         icon={<Calendar className="h-10 w-10 text-green-500/50" />}
       />
