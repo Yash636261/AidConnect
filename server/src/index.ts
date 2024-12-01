@@ -12,7 +12,7 @@ app.get("/test", (req: express.Request, res: express.Response) => {
   res.send("Hello! the server is up and running");
 });
 
-
+app.use("/api/data", source);
 app.use("/api/source", source);
 app.use("/api/actions", actions);
 app.use("/api/scraping", scraping);

@@ -13,9 +13,7 @@ const ActiveCasesMap = dynamic(
   () => import("@/components/shared/active-cases-map"),
   { ssr: false }
 );
-const Schedule = dynamic(() => import("@/components/shared/schedule"), {
-  ssr: false,
-});
+
 const ModeToggle = dynamic(() => import("@/components/shared/modetoggle"), {
   ssr: false,
 });
