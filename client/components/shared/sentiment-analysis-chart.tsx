@@ -28,7 +28,7 @@ export default function SentimentAnalysisChart({
   };
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader>
         <CardTitle>Sentiment Analysis</CardTitle>
       </CardHeader>

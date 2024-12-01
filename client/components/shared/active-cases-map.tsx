@@ -54,10 +54,7 @@ export default function ActiveCasesMap({ locations }: ActiveCasesMapProps) {
   );
 
   return (
-    <Card className="w-full p-0 overflow-hidden">
-      <CardHeader>
-        <CardTitle>Active Cases Map</CardTitle>
-      </CardHeader>
+    <Card className="w-full p-0 overflow-hidden rounded-2xl">
       <CardContent className="p-0">
         <div className="h-[400px] w-full">
           <MapContainer

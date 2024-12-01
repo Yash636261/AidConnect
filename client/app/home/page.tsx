@@ -26,19 +26,6 @@ const SourceDistributionChart = dynamic(
   { ssr: false }
 );
 
-interface NavLinks {
-  label: string;
-  href: string;
-}
-
-const navlinks: NavLinks[] = [
-  // { label: "Dashboard", href: "#" },
-  // { label: "Profile", href: "#" },
-  // { label: "Settings", href: "#" },
-  // { label: "Logout", href: "#" },
-  // { label: "API", href: "/api" },
-];
-
 export default async function Page() {
   try {
     const response = await axios.get("http://localhost:8000/api/data/stats");
@@ -54,8 +41,8 @@ export default async function Page() {
 const Dashboard = ({ data }: any) => {
   const height = "calc(100vh - 36px)";
   return (
-    <main className="p-8 space-y-8 max-h-screen overflow-y-scroll">
-      <h1 className="text-4xl font-bold mb-8">Disaster Relief Dashboard</h1>
+    <main className="p-8 space-y-8 max-h-screen overflow-y-scroll bg-[#E9EDF4] dark:bg-gray-950">
+      <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
       <Metrics data={data} />
       <div className="grid gap-8 md:grid-cols-2">
         <NeedsChart needs={data.needs} />

@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { LineChart, AlertTriangle, Users, Calendar } from 'lucide-react';
+import { LineChart, AlertTriangle, Users, Calendar } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -13,7 +13,7 @@ interface MetricCardProps {
 
 function MetricCard({ title, value, change, trend, icon }: MetricCardProps) {
   return (
-    <Card className="border-0 bg-blue-50 dark:bg-neutral-900 hover:bg-blue-100 dark:hover:bg-neutral-950">
+    <Card className="border-0 bg-white dark:bg-neutral-900 hover:bg-gray-100 dark:hover:bg-neutral-950 shadow-md hover:shadow-lg rounded-2xl">
       <CardContent className="p-4 border-0">
         <div className="flex items-center justify-between">
           <div>
@@ -37,10 +37,10 @@ function MetricCard({ title, value, change, trend, icon }: MetricCardProps) {
   );
 }
 
-export default function Metrics({data}: any) {
+export default function Metrics({ data }: any) {
   const calculateChange = (current: number, previous: number) => {
     const change = ((current - previous) / previous) * 100;
-    return change.toFixed(2) + '%';
+    return change.toFixed(2) + "%";
   };
 
   return (
@@ -55,7 +55,10 @@ export default function Metrics({data}: any) {
       <MetricCard
         title="High Urgency"
         value={data.urgencyLevels.high.toString()}
-        change={calculateChange(data.urgencyLevels.high, data.urgencyLevels.high * 0.9)} // Assuming 10% increase
+        change={calculateChange(
+          data.urgencyLevels.high,
+          data.urgencyLevels.high * 0.9
+        )} // Assuming 10% increase
         trend="up"
         icon={<AlertTriangle className="h-10 w-10 text-red-500/50" />}
       />
@@ -68,13 +71,23 @@ export default function Metrics({data}: any) {
       />
       <MetricCard
         title="Resolved Cases"
-        value={(data.totalPosts - data.urgencyLevels.high - data.urgencyLevels.moderate).toString()}
-        change={calculateChange(data.totalPosts - data.urgencyLevels.high - data.urgencyLevels.moderate, 
-                                (data.totalPosts - data.urgencyLevels.high - data.urgencyLevels.moderate) * 0.78)} // Assuming 22% increase
+        value={(
+          data.totalPosts -
+          data.urgencyLevels.high -
+          data.urgencyLevels.moderate
+        ).toString()}
+        change={calculateChange(
+          data.totalPosts -
+            data.urgencyLevels.high -
+            data.urgencyLevels.moderate,
+          (data.totalPosts -
+            data.urgencyLevels.high -
+            data.urgencyLevels.moderate) *
+            0.78
+        )} // Assuming 22% increase
         trend="up"
         icon={<Calendar className="h-10 w-10 text-green-500/50" />}
       />
     </div>
   );
 }
-

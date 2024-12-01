@@ -28,7 +28,7 @@ export default function UrgencyLevelPieChart({
   };
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader>
         <CardTitle>Urgency Levels</CardTitle>
       </CardHeader>

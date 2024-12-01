@@ -56,7 +56,7 @@ export default function NeedsChart({ needs }: NeedsChartProps) {
   };
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader>
         <CardTitle>Needs Distribution</CardTitle>
       </CardHeader>

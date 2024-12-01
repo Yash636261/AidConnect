@@ -30,7 +30,7 @@ export default function SourceDistributionChart({
   };
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader>
         <CardTitle>Source Distribution</CardTitle>
       </CardHeader>
