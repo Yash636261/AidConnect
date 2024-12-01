@@ -26,9 +26,9 @@ const links: Links[] = [
     href: "/home/availability",
     icon: "Store",
   },
-  { label: "Profile", href: "#", icon: "User" },
-  { label: "Settings", href: "#", icon: "Settings" },
-  { label: "API", href: "/api", icon: "AppWindowIcon" },
+
+
+  { label: "API", href: "/doc", icon: "AppWindowIcon" },
 ];
 export default function RootLayout({
   children,
